@@ -15,14 +15,28 @@ export class MyBody extends Component {
         }
     }
 
-   handleSubmit(e) {
+   async handleSubmit(e) {
         e.preventDefault()
         this.setState((old) => (old.messanges.push({text: this.state.textarea})))
         this.setState({textarea:""})
-        fetch(`http://localhost:8080/${this.state.textarea}`)
-        .then(response => response.json())
-        .then(data => this.setState(old => {old.messanges.push({text: data["Request"]})}))
 
+        const url = 'http://localhost:8080'
+        const data = {username: "felix"}
+
+        try{
+            const response = await fetch(url ,{
+                method: "POST",
+                body: JSON.stringify(data),
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            })
+            const json = await response.json()
+            console.log(JSON.stringify(json))
+        }
+        catch(error){
+
+        }
     }
 
 
