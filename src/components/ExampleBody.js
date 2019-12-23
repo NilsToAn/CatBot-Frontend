@@ -11,22 +11,46 @@ export class MyBody extends Component {
         this.state={
             messanges:[
                 {text: "ersetns"}
-            ]
+            ],
+            toServer:{
+                username:"Felix", //name of the user
+                message:"Hallo du Arsch. Wie gehts?", //current input
+                informationPackage:
+                {
+                    origin: [], //can be multiple citys, extra field for auto-complet via js-req
+                    destination: [], //see origin
+                    date: [], //only one date, can be changed via interace and after request-done
+                    time: [], //see date
+                    traveller: 1, 
+                    budget: 0,
+                    transfers: 0,
+                    requestDone: false, //bool, after true, fields can be overriden via nlu
+                    jsRequest: ["open-window-for-dest", "open-window-for-origin"], //sets extra windows for autocomplte
+                    state: "" //if users input can be inferred due to questions
+                }
+            }
         }
     }
 
    async handleSubmit(e) {
         e.preventDefault()
-        this.setState((old) => (old.messanges.push({text: this.state.textarea})))
-        this.setState({textarea:""})
-
+        const updateState = async () => {
+            let mes = this.state.textarea
+            this.setState((old) => (old.messanges.push({text: mes})))
+            this.setState((old) => {
+                const newState = old
+                newState.toServer.message = mes
+                return newState
+            })
+            this.setState({textarea:""})
+        }
+        await updateState()
         const url = 'http://localhost:8080'
-        const data = {username: "felix"}
 
         try{
             const response = await fetch(url ,{
                 method: "POST",
-                body: JSON.stringify(data),
+                body: JSON.stringify(this.state.toServer),
                 headers:{
                     'Content-Type':'application/json'
                 }
