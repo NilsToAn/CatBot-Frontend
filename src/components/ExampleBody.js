@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import ListGroup from 'react-bootstrap/ListGroup'
+import processResponse from '../js/prosessResponse'
 
 export class MyBody extends Component {
     constructor(props){
@@ -17,9 +18,9 @@ export class MyBody extends Component {
                 message:"Hallo du Arsch. Wie gehts?", //current input
                 informationPackage:
                 {
-                    origin: [], //can be multiple citys, extra field for auto-complet via js-req
+                    origin: ["Bochum"], //can be multiple citys, extra field for auto-complet via js-req
                     destination: [], //see origin
-                    date: [], //only one date, can be changed via interace and after request-done
+                    date: [2020,1,1], //only one date, can be changed via interace and after request-done
                     time: [], //see date
                     traveller: 1, 
                     budget: 0,
@@ -56,7 +57,8 @@ export class MyBody extends Component {
                 }
             })
             const json = await response.json()
-            console.log(JSON.stringify(json))
+            console.log(json)
+            processResponse(json)
         }
         catch(error){
 
@@ -80,12 +82,12 @@ export class MyBody extends Component {
             <div>
                 <ListGroup>
                     {this.state.messanges.map(message =>
-                        (<ListGroup.Item>
+                        (<ListGroup.Item key={message.text} className='text-left'>
                             {message.text}
                     </ListGroup.Item>))}
                 </ListGroup>
                 <Form onSubmit={this.handleSubmit}> 
-                    <Form.Group>
+                    <Form.Group className='text-left'>
                         <Form.Label> Eingabe  </Form.Label>
                         <Form.Control 
                             onChange={this.handleInputChange}
