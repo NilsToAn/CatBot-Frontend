@@ -11,7 +11,7 @@ export class MyBody extends Component {
         this.handleInputChange = this.handleInputChange.bind(this)
         this.state={
             messanges:[
-                {text: "ersetns"}
+                {text: "ersetns", key: 0}
             ],
             toServer:{
                 username:"Felix", //name of the user
@@ -36,14 +36,15 @@ export class MyBody extends Component {
    async handleSubmit(e) {
         e.preventDefault()
         const updateState = async () => {
-            let mes = this.state.textarea
-            this.setState((old) => (old.messanges.push({text: mes})))
+            const mes = this.state.textarea
             this.setState((old) => {
                 const newState = old
+
+                newState.messanges.push({text: mes, key : newState.messanges.length})
+                newState.textarea = ""
                 newState.toServer.message = mes
                 return newState
             })
-            this.setState({textarea:""})
         }
         await updateState()
         const url = 'http://localhost:8080'
@@ -58,7 +59,13 @@ export class MyBody extends Component {
             })
             const json = await response.json()
             console.log(json)
-            processResponse(json)
+            const[informationPackage, answerPackege, resultPackage] = processResponse(json)
+            this.setState((old)=>{
+                old.toServer.informationPackage = Object.assign(old.toServer.informationPackage,informationPackage)
+                return old
+            })
+            console.log(informationPackage)
+            console.log(this.state)
         }
         catch(error){
 
@@ -81,8 +88,8 @@ export class MyBody extends Component {
         return (
             <div>
                 <ListGroup>
-                    {this.state.messanges.map(message =>
-                        (<ListGroup.Item key={message.text} className='text-left'>
+                    {this.state.messanges.map((message) =>
+                        (<ListGroup.Item key={message.key} className='text-left'>
                             {message.text}
                     </ListGroup.Item>))}
                 </ListGroup>
