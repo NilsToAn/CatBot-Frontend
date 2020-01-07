@@ -1,6 +1,6 @@
 const firstMainState = {
     messanges:[
-        {text: "ersetns", key: 0}
+        {text: "Hallo", key: 0, user:false}
     ],
     toServer:{
         username:"Felix", //name of the user
