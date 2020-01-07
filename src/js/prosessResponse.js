@@ -1,7 +1,7 @@
 function processResponse(responseJson) {
     let [informationPackage, answerPackege, resultPackage] = []
     for (const pack in responseJson) {
-        console.log(pack)
+        //console.log(pack)
         switch (pack) {
             case "informationPackage":
                 informationPackage = responseJson[pack]

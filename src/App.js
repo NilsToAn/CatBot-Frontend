@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import MyHeader from './components/MyHeader'
-import MyBody from './components/ExampleBody'
+import MyBody from './components/MainBody'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 
