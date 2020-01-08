@@ -2,6 +2,7 @@ const firstMainState = {
     messanges:[
         {text: "Hallo", key: 0, user:false}
     ],
+    emotion: 'normal',
     toServer:{
         username:"Felix", //name of the user
         message:"Hallo du Arsch. Wie gehts?", //current input

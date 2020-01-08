@@ -5,6 +5,7 @@ import MessageList from './MessageList'
 import MyUserinput from './MyUserinput'
 import showMessages from '../js/showMessages'
 import showResult from '../js/showResult'
+import MyEmotionPic from './MyEmotionPic'
 
 export class MyBody extends Component {
     constructor(props){
@@ -49,6 +50,7 @@ export class MyBody extends Component {
             this.setState((old)=>{
                 const newState = old
                 newState.toServer.informationPackage = Object.assign(old.toServer.informationPackage,informationPackage)
+                newState.emotion = answerPackege.emotion
                 return newState
             })
 
@@ -73,6 +75,7 @@ export class MyBody extends Component {
     render() {
         return (
             <Fragment>
+                <MyEmotionPic emotion={this.state.emotion}/>
                 <MessageList messanges={this.state.messanges}/>
                 <MyUserinput handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} textarea={this.state.textarea}/>
             </Fragment>
