@@ -6,6 +6,7 @@ import showMessages from '../js/showMessages'
 import showResult from '../js/showResult'
 import MyEmotionPic from './MyEmotionPic'
 import DisplayPart from './DisplayPart'
+import ShowResults from './ShowResult'
 
 export class MyBody extends Component {
     constructor(props){
@@ -78,8 +79,19 @@ export class MyBody extends Component {
         return (
             <Fragment>
                 <MyEmotionPic emotion={this.state.emotion}/>
-                <DisplayPart messanges={this.state.messanges} infos={this.state.toServer.informationPackage}/>
-                <MyUserinput handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} textarea={this.state.textarea}/>
+                <div style={{overflow: "hidden"}}>
+                    <div style={{width:this.state.displayResult?"50%":"100%", float: 'left'}}>
+                        <DisplayPart 
+                            messanges={this.state.messanges} 
+                            infos={this.state.toServer.informationPackage}
+                            changeDisplayResult = {() => {this.setState(old => (Object.assign({},old, {displayResult: !old.displayResult})))}}
+                        />
+                        <MyUserinput handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} textarea={this.state.textarea}/>
+                    </div>
+                    {this.state.displayResult?<div style={{float: "left"}}>
+                        <ShowResults />
+                    </div>:null}
+                </div>
             </Fragment>
         )
     }

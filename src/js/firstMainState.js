@@ -1,4 +1,5 @@
 const firstMainState = {
+    displayResult:false,
     messanges:[
         {text: "Hallo", key: 0, user:false}
     ],

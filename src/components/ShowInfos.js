@@ -7,10 +7,10 @@ export default function ShowInfos(props) {
         rows.push([key, props.infos[key]])
     }
     return (
-        <Table>
+        <Table className="border rounded-lg">
             <tbody>
                 {rows.map((o)=>(o[1]?
-                        <tr>
+                        <tr key={o[0]}>
                             <td>{o[0]}</td>
                             <td>{o[1]}</td>
                         </tr>  
