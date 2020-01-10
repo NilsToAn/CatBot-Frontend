@@ -16,7 +16,7 @@ export default function MyUserinput(props) {
                 value={props.textarea}/>
         </Form.Group>
         <Button variant="primary" type="submit">
-            Submit
+            Senden
         </Button>
     </Form>
     )

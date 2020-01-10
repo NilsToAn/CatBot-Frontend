@@ -1,11 +1,11 @@
 import React, { Component, Fragment } from 'react'
 import processResponse from '../js/prosessResponse'
 import firstMainState from '../js/firstMainState'
-import MessageList from './MessageList'
 import MyUserinput from './MyUserinput'
 import showMessages from '../js/showMessages'
 import showResult from '../js/showResult'
 import MyEmotionPic from './MyEmotionPic'
+import DisplayPart from './DisplayPart'
 
 export class MyBody extends Component {
     constructor(props){
@@ -17,8 +17,10 @@ export class MyBody extends Component {
 
    async handleSubmit(e) {
         e.preventDefault()
+        const mes = this.state.textarea
+        if(!mes){return}
         const updateState = async () => {
-            const mes = this.state.textarea
+            
             this.setState((old) => {
                 const newState = old
 
@@ -76,7 +78,7 @@ export class MyBody extends Component {
         return (
             <Fragment>
                 <MyEmotionPic emotion={this.state.emotion}/>
-                <MessageList messanges={this.state.messanges}/>
+                <DisplayPart messanges={this.state.messanges} infos={this.state.toServer.informationPackage}/>
                 <MyUserinput handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} textarea={this.state.textarea}/>
             </Fragment>
         )
