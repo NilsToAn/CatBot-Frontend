@@ -25,6 +25,8 @@ export default class DisplayPart extends Component {
             case('infoButton'):
                 this.setState(old => ({showMessanges: !old.showMessanges}))
             break
+            default:
+                break
         }
     }
     render() {
