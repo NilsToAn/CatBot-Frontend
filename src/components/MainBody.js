@@ -13,6 +13,7 @@ export class MyBody extends Component {
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleInputChange = this.handleInputChange.bind(this)
+        this.handleResultButton = this.handleResultButton.bind(this)
         this.state = firstMainState //in js Folder
     }
 
@@ -49,7 +50,7 @@ export class MyBody extends Component {
             //Verarbeitung
             const[informationPackage, answerPackege, resultPackage] = processResponse(json)
             showMessages(answerPackege, (a) => {this.setState(a)})
-            showResult(resultPackage, (a) => {this.setState(a)})
+            //showResult(resultPackage, (a) => {this.setState(old => Object.assign({},old,{results: a}))})
             this.setState((old)=>{
                 const newState = old
                 newState.toServer.informationPackage = Object.assign(old.toServer.informationPackage,informationPackage)
@@ -73,7 +74,26 @@ export class MyBody extends Component {
           [name]: value
         });
       }
+    
+    async handleResultButton(event){
+        this.setState(old => (Object.assign({},old, {displayResult: !old.displayResult})))
+        //Result anfrage
+        const url = 'http://localhost:8080/request'
+        try{
+            const response = await fetch(url ,{
+                method: "POST",
+                body: JSON.stringify(this.state.toServer),
+                headers:{
+                    'Content-Type':'application/json'
+                }
+            })
+            const json = await response.json()
+            showResult(json, (a) => {this.setState(old => Object.assign({},old,{results: a}))})
+        }
+        catch{
 
+        }
+    }
 
     render() {
         return (
@@ -84,12 +104,12 @@ export class MyBody extends Component {
                         <DisplayPart 
                             messanges={this.state.messanges} 
                             infos={this.state.toServer.informationPackage}
-                            changeDisplayResult = {() => {this.setState(old => (Object.assign({},old, {displayResult: !old.displayResult})))}}
+                            changeDisplayResult = {this.handleResultButton}
                         />
                         <MyUserinput handleSubmit={this.handleSubmit} handleInputChange={this.handleInputChange} textarea={this.state.textarea}/>
                     </div>
-                    {this.state.displayResult?<div style={{float: "left"}}>
-                        <ShowResults />
+                    {this.state.displayResult?<div style={{float: "left", width: "50%"}}>
+                        <ShowResults results={this.state.results}/>
                     </div>:null}
                 </div>
             </Fragment>

@@ -1,4 +1,5 @@
 const firstMainState = {
+    results: {test:"teste"},
     displayResult:false,
     messanges:[
         {text: "Hallo", key: 0, user:false}
@@ -11,7 +12,7 @@ const firstMainState = {
         {
             origin: ["Bochum"], //can be multiple citys, extra field for auto-complet via js-req
             destination: [], //see origin
-            date: [2020,1,1], //only one date, can be changed via interace and after request-done
+            date: [5,5,2020], //only one date, can be changed via interace and after request-done
             time: [], //see date
             traveller: 1, 
             budget: 0,

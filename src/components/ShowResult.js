@@ -1,11 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
+import ShowOneResult from './ShowOneResult'
 
-export default class ShowResult extends Component {
-    render() {
-        return (
-            <div>
-                Ergebnisse
-            </div>
-        )
+export default function ShowResult(props) {
+    const MyResultComponents = []
+    if(props.results.arrival){
+        MyResultComponents.push(
+            <ShowOneResult result={props.results}/>        
+            )
     }
+    return (
+        <div>
+            {MyResultComponents}
+        </div>
+    )
 }
+
