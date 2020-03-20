@@ -2,7 +2,6 @@ import React from 'react'
 import '../css/oneResultTable.css'
 
 export default function ShowOneResult(props) {
-    console.log(props.result)
     const r = props.result
     return (
         <div>

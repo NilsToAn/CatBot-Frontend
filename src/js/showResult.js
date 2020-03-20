@@ -19,7 +19,7 @@ export default function showResult(resultPackage, setResult){
         resultPackage[i].departure.date = getFullDate(depDate)
         resultPackage[i].departure.time = getTime(depDate)
 
-        //duration: {hour: 14, minutes: 35}
+
         const durMin = resultPackage[i].duration.minutes < 10 ? "0"+resultPackage[i].duration.minutes : resultPackage[i].duration.minutes
         resultPackage[i].dur = resultPackage[i].duration.hour+':'+durMin 
     }

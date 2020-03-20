@@ -6,7 +6,7 @@ export default function ShowResult(props) {
     for(let i = 0; i < props.results.length; i++){
         if(props.results[i].arrival){
             MyResultComponents.push(
-                <ShowOneResult result={props.results[i]}/>        
+                <ShowOneResult result={props.results[i]} key={props.results[i].departure.timestamp}/>        
                 )
         }
     }
