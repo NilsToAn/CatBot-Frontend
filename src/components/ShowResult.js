@@ -3,10 +3,12 @@ import ShowOneResult from './ShowOneResult'
 
 export default function ShowResult(props) {
     const MyResultComponents = []
-    if(props.results.arrival){
-        MyResultComponents.push(
-            <ShowOneResult result={props.results}/>        
-            )
+    for(let i = 0; i < props.results.length; i++){
+        if(props.results[i].arrival){
+            MyResultComponents.push(
+                <ShowOneResult result={props.results[i]} key={props.results[i].departure.timestamp}/>        
+                )
+        }
     }
     return (
         <div>

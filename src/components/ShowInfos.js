@@ -1,11 +1,9 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
+import sortInfos from '../js/sortInfos'
 
 export default function ShowInfos(props) {
-    const rows = []
-    for (const key in props.infos){
-        rows.push([key, props.infos[key]])
-    }
+    const rows = sortInfos(props.infos)
     return (
         <Table className="border rounded-lg">
             <tbody>
