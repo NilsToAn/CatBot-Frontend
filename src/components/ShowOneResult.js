@@ -4,7 +4,7 @@ import React from 'react'
 export default function ShowOneResult(props) {
     console.log(props.result)
     return (
-        <div className="sr-row row ride-available ab-test-ride-flags-0 interconnection-0-471-4628-96773811-30-96967931 ride--unbooked js-ride--unbooked" data-ride-data="{&quot;id&quot;:&quot;interconnection-0-471-4628-96773811-30-96967931&quot;,&quot;persons&quot;:1,&quot;status&quot;:&quot;available&quot;}" data-ride-direction="direct" data-btn-tmp="{&quot;remove&quot;:&quot;%seats_count% Platz entfernen&quot;,&quot;add&quot;:&quot;%seats_count% Platz buchen&quot;,&quot;switch&quot;:&quot;%seats_count% Platz wechseln&quot;}" data-departure-date="2020-03-11">
+         <div className="sr-row row ride-available ab-test-ride-flags-0 interconnection-0-471-4628-96773811-30-96967931 ride--unbooked js-ride--unbooked" data-ride-data="{&quot;id&quot;:&quot;interconnection-0-471-4628-96773811-30-96967931&quot;,&quot;persons&quot;:1,&quot;status&quot;:&quot;available&quot;}" data-ride-direction="direct" data-btn-tmp="{&quot;remove&quot;:&quot;%seats_count% Platz entfernen&quot;,&quot;add&quot;:&quot;%seats_count% Platz buchen&quot;,&quot;switch&quot;:&quot;%seats_count% Platz wechseln&quot;}" data-departure-date="2020-03-11">
             <div className="col-xs-7 col-sm-5 col-md-6 col-lg-5 time-transfer">
                 <div className="row"><div className="col-xs-12 ride-stations">
                     <table className="flix-connection fixed-layout">
