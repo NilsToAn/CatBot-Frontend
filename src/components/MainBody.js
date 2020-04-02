@@ -76,23 +76,25 @@ export class MyBody extends Component {
       }
     
     async handleResultButton(event){
-        this.setState(old => (Object.assign({},old, {displayResult: !old.displayResult})))
         //Result anfrage
-        const url = 'http://localhost:8080/request'
-        try{
-            const response = await fetch(url ,{
-                method: "POST",
-                body: JSON.stringify(this.state.toServer),
-                headers:{
-                    'Content-Type':'application/json'
-                }
-            })
-            const json = await response.json()
-            showResult(json, (a) => {this.setState(old => Object.assign({},old,{results: a}))})
+        if(this.state.displayResult === false){
+         const url = 'http://localhost:8080/request'
+          try{
+              const response = await fetch(url ,{
+                  method: "POST",
+                  body: JSON.stringify(this.state.toServer),
+                  headers:{
+                      'Content-Type':'application/json'
+                  }
+             })
+             const json = await response.json()
+             showResult(json, (a) => {this.setState(old => Object.assign({},old,{results: a}))})
+          }
+         catch{
+  
+          }
         }
-        catch{
-
-        }
+        this.setState(old => (Object.assign({},old, {displayResult: !old.displayResult})))
     }
 
     render() {
