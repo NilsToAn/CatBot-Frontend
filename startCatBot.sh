@@ -1,1 +1,1 @@
-. startCatBotClient.sh  & . StartCatBotServer.sh && fg
+. StartCatBotServer.sh & . startCatBotClient.sh  && fg
