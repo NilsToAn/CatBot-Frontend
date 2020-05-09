@@ -9,6 +9,7 @@ export default function MyUserinput(props) {
         <Form.Group className='text-left'>
             <Form.Label> Eingabe  </Form.Label>
             <Form.Control 
+                onKeyDown={(event) => {if (event.keyCode === 13) { props.handleSubmit(event); return false}}}
                 onChange={props.handleInputChange}
                 name="textarea"
                 as="textarea" 
@@ -16,7 +17,7 @@ export default function MyUserinput(props) {
                 value={props.textarea}/>
         </Form.Group>
         <Button variant="primary" type="submit">
-            Submit
+            Senden
         </Button>
     </Form>
     )

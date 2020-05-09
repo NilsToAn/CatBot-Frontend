@@ -1,13 +1,22 @@
 import React from 'react'
-import ListGroup from 'react-bootstrap/ListGroup'
+import PropTypes from 'prop-types'
+import OneMessage from './OneMessage.js'
+import '../css/ChatStyle.css'
 
-export default function MessageList(props) {
-    return (
-        <ListGroup>
+export default function MessageList (props) {
+  console.log(props)
+  return (
+    <section className="chat__body">
+      <div className="messages">
         {props.messanges.map((message) =>
-            (<ListGroup.Item key={message.key} className='text-left'>
-                {message.text}
-        </ListGroup.Item>))}
-    </ListGroup>
-    )
+          (<OneMessage key={message.key} data={{ user: message.user, text: message.text }}>
+          </OneMessage>))}
+
+      </div>
+    </section>
+  )
+}
+
+MessageList.propTypes = {
+  messanges: PropTypes.array.isRequired
 }
