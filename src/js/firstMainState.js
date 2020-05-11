@@ -12,7 +12,7 @@ const firstMainState = {
         {
           origin: ['Bochum'], // can be multiple citys, extra field for auto-complet via js-req
           destination: ['Hannover'], // see origin
-          date: [5, 5, 2020], // only one date, can be changed via interace and after request-done
+          date: [5, 7, 2020], // only one date, can be changed via interace and after request-done
           time: [], // see date
           traveller: 1,
           budget: 0,
