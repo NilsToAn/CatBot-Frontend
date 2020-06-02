@@ -135,6 +135,7 @@ html, body {
 
 .message__text,
 .message__image__text .message__text__content {
+  text-align: left;
   padding-top: 10px;
   padding-left: 10px;
   padding-right: 10px;
