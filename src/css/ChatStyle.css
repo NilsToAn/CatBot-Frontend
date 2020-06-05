@@ -12,8 +12,8 @@ html, body {
 .chat__body {
   display: flex;
   width: 100%;
-  height: 100%;
-  /*background-image: url("https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/Resources/art/bg_initial.jpg");
+  /*height: 100%;
+  background-image: url("https://raw.githubusercontent.com/telegramdesktop/tdesktop/dev/Telegram/Resources/art/bg_initial.jpg");
   background-position-y: -54px;
   background-attachment: fixed;*/
 }
@@ -184,4 +184,8 @@ html, body {
 }
 .message__image:hover .message__time {
   opacity: 1;
+}
+.MessageContainer {
+  overflow-y: scroll;
+  height: 300px;
 }

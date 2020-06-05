@@ -4,14 +4,15 @@ import OneMessage from './OneMessage.js'
 import '../css/ChatStyle.css'
 
 export default function MessageList (props) {
-  console.log(props)
+
+  //console.log(props)
   return (
     <section className="chat__body">
       <div className="messages">
         {props.messanges.map((message) =>
           (<OneMessage key={message.key} data={{ user: message.user, text: message.text }}>
           </OneMessage>))}
-
+          <div ref={props.lastRef} />
       </div>
     </section>
   )

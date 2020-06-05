@@ -1,6 +1,7 @@
 export default function showMessages(answerPackege, setState){
-    const speed = 120
+    const speed = 30
     let {preface, mainAnswer, last} = answerPackege
+    console.log(answerPackege)
     const setNewText = (text) => {
         setState((old) => {
             const newState = old
