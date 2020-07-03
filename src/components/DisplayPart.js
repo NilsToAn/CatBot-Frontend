@@ -6,9 +6,14 @@ import Figure from 'react-bootstrap/Figure'
 import ShowInfos from './ShowInfos'
 
 export default class DisplayPart extends Component {
+
+  
+
   constructor (props) {
     super(props)
+    this.messagesEndRef = React.createRef()
     this.handleClick = this.handleClick.bind(this)
+    this.scrollToBottom = this.scrollToBottom.bind(this)
     this.state = {
       showMessanges: true
     }
@@ -27,6 +32,13 @@ export default class DisplayPart extends Component {
         break
     }
   }
+  
+  componentDidUpdate () {
+    this.scrollToBottom()
+  }
+  scrollToBottom = () => {
+    this.messagesEndRef.current && this.messagesEndRef.current.scrollIntoView()
+  }
 
   render () {
     return (
@@ -36,8 +48,8 @@ export default class DisplayPart extends Component {
             <Button name="resultButton" onClick={this.handleClick}><Figure.Image width={20}/></Button>
             <Button name="infoButton" onClick={this.handleClick}><Figure.Image name="infoButton" src={notizpic} width={20}/></Button>
           </div>
-          <div style={{ clear: 'right' }}>
-            {this.state.showMessanges ? <MessageList messanges={this.props.messanges} /> : <ShowInfos infos={this.props.infos} />}
+          <div className="MessageContainer" style={{ clear: 'right' }}>
+            {this.state.showMessanges ? <MessageList messanges={this.props.messanges} lastRef={this.messagesEndRef}/> : <ShowInfos infos={this.props.infos} />}
           </div>
         </div>
       </Fragment>
