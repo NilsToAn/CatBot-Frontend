@@ -1,19 +1,28 @@
 import React from 'react'
 import Figure from 'react-bootstrap/Figure'
-import angryPic from '../pics/wuetend.png'
-import normalPic from '../pics/gluecklich.png'
+import sadPic from '../pics/sad.png'
+import happyPic from '../pics/happy.png'
+import thinkingPic from '../pics/thinking.png'
+import writerPic from '../pics/writer.png'
+
 
 export default function MyEmotionPic(props) {
     let pic = ""
     switch (props.emotion) {
-        case "normal":
-            pic = normalPic
+        case "happy":
+            pic = happyPic
             break;
-        case "angry":
-            pic = angryPic
+        case "sad":
+            pic = sadPic
+            break;
+        case "thinking":
+            pic = thinkingPic
+            break;
+        case "writer":
+            pic = writerPic
             break;
         default:
-            pic = normalPic
+            pic = happyPic
             break
     }
     return (
