@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from 'react'
-import processResponse from '../js/prosessResponse'
 import firstMainState from '../js/firstMainState'
+import makeServerUpdate from '../js/makeServerUpdate'
 import MyUserinput from './MyUserinput'
-import showMessages from '../js/showMessages'
 import showResult from '../js/showResult'
 import MyEmotionPic from './MyEmotionPic'
 import DisplayPart from './DisplayPart'
@@ -33,37 +32,12 @@ export class MyBody extends Component {
         await updateState()
 
         //Anfrage
-        const url = 'http://localhost:8080'
-        try {
-            const response = await fetch(url, {
-                method: "POST",
-                body: JSON.stringify(this.state.toServer),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            //Antwort
-            const json = await response.json()
-            //Verarbeitung
-            const [informationPackage, answerPackege] = processResponse(json)
-            showMessages(answerPackege, (a) => { this.setState(a) })
-            //showResult(resultPackage, (a) => {this.setState(old => Object.assign({},old,{results: a}))})
-            this.setState((old) => {
-                const newState = old
-                newState.toServer.informationPackage = Object.assign(old.toServer.informationPackage, informationPackage)
-                newState.emotion = answerPackege.emotion
-                return newState
-            })
-
-        }
-        catch (error) {
-
-        }
+        makeServerUpdate(this.state.toServer, (a) => { this.setState(a) })
     }
 
 
     handleInputChange(event) {
-        console.log(event)
+        //console.log(event)
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
