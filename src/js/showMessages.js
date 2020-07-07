@@ -1,7 +1,7 @@
 export default function showMessages(answerPackege, setState){
     const speed = 30
     let {preface, mainAnswer, last} = answerPackege
-    console.log(answerPackege)
+    //console.log(answerPackege)
     const setNewText = (text) => {
         setState((old) => {
             const newState = old
@@ -25,12 +25,21 @@ export default function showMessages(answerPackege, setState){
         }
     }
 
+    const emptyString = '__empty__'
 
-
-
+    if(preface === emptyString){
+        preface = ""
+    }
+    if(mainAnswer === emptyString){
+        mainAnswer = ""
+    }
+    if(last === emptyString){
+        last = ""
+    }
     const t1 = (preface.length+1)*speed
     const t2 = (mainAnswer.length+1)*speed+t1
-    typeNewText(preface)
-    setTimeout(function(){typeNewText(mainAnswer)}, t1)
-    setTimeout(function(){typeNewText(last)}, t2)
+
+    preface && typeNewText(preface)
+    mainAnswer && setTimeout(function(){typeNewText(mainAnswer)}, t1)
+    last && setTimeout(function(){typeNewText(last)}, t2)
 }
