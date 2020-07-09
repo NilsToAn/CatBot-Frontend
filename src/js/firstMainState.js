@@ -2,7 +2,6 @@ const firstMainState = {
   results: { test: 'teste' },
   displayResult: false,
   messanges: [
-    { text: 'Hallo', key: 0, user: false }
   ],
   emotion: 'normal',
   toServer: {

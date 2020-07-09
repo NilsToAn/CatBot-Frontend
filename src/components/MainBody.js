@@ -16,6 +16,25 @@ export class MyBody extends Component {
         this.state = firstMainState //in js Folder
     }
 
+    componentDidMount(){
+        this.sendMessageToServer('start')
+    }
+    
+    async sendMessageToServer(mes){
+        if (!mes) { return }
+        const updateState = async () => {
+            this.setState((old) => {
+                const newState = old
+                newState.toServer.message = mes
+                return newState
+            })
+        }
+        await updateState()
+
+        //Anfrage
+        makeServerUpdate(this.state.toServer, (a) => { this.setState(a) })
+    }
+
     async handleSubmit(e) {
         e.preventDefault()
         const mes = this.state.textarea

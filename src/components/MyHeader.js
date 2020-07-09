@@ -4,7 +4,6 @@ export class MyHeader extends Component {
     render() {
         return (
             <div>
-                Cat Bot
             </div>
         )
     }

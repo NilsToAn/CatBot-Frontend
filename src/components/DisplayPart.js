@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import notizpic from '../pics/notiz.png'
 import Figure from 'react-bootstrap/Figure'
 import ShowInfos from './ShowInfos'
+import {MessageListStyle} from '../js/styles' 
 
 export default class DisplayPart extends Component {
 
@@ -48,7 +49,7 @@ export default class DisplayPart extends Component {
             <Button name="resultButton" onClick={this.handleClick}><Figure.Image width={20}/></Button>
             <Button name="infoButton" onClick={this.handleClick}><Figure.Image name="infoButton" src={notizpic} width={20}/></Button>
           </div>
-          <div className="MessageContainer" style={{ clear: 'right' }}>
+          <div className="MessageContainer" style={MessageListStyle}>
             {this.state.showMessanges ? <MessageList messanges={this.props.messanges} lastRef={this.messagesEndRef}/> : <ShowInfos infos={this.props.infos} />}
           </div>
         </div>

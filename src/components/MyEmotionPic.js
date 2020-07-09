@@ -1,5 +1,6 @@
 import React from 'react'
 import Figure from 'react-bootstrap/Figure'
+import {TopImageStyle} from '../js/styles'
 import sadPic from '../pics/sad.png'
 import happyPic from '../pics/happy.png'
 import thinkingPic from '../pics/thinking.png'
@@ -26,10 +27,9 @@ export default function MyEmotionPic(props) {
             break
     }
     return (
-    <Figure>
+    <Figure >
         <Figure.Image
-            width={180}
-            height={180}
+            style={TopImageStyle}
             alt={props.emotion}
             src={pic}
         />
