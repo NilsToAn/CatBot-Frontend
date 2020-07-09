@@ -6,6 +6,7 @@ import showResult from '../js/showResult'
 import MyEmotionPic from './MyEmotionPic'
 import DisplayPart from './DisplayPart'
 import ShowResults from './ShowResult'
+import showMessages from '../js/showMessages'
 
 export class MyBody extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ export class MyBody extends Component {
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleResultButton = this.handleResultButton.bind(this)
         this.state = firstMainState //in js Folder
+        this.ShowMessages = new showMessages((a) => { this.setState(a) })
     }
 
     componentDidMount(){
@@ -32,7 +34,7 @@ export class MyBody extends Component {
         await updateState()
 
         //Anfrage
-        makeServerUpdate(this.state.toServer, (a) => { this.setState(a) })
+        makeServerUpdate(this.state.toServer, (a) => { this.setState(a) },  this.ShowMessages)
     }
 
     async handleSubmit(e) {

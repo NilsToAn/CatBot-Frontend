@@ -1,8 +1,7 @@
-import showMessages from './showMessages'
 import processResponse from './prosessResponse'
 import handleServerState from './handleServerState'
 
-export default async function makeServerUpdate(mainStateToServer, setMainState){
+export default async function makeServerUpdate(mainStateToServer, setMainState, ShowMessages){
     const url = 'http://localhost:8080'
     try {
         const response = await fetch(url, {
@@ -16,7 +15,7 @@ export default async function makeServerUpdate(mainStateToServer, setMainState){
         const json = await response.json()
         //Verarbeitung
         const [informationPackage, answerPackege] = processResponse(json)
-        showMessages(answerPackege, (a) => { setMainState(a) })
+        ShowMessages.showMessages(answerPackege)
 
         handleServerState(informationPackage.state, mainStateToServer, setMainState)
         
