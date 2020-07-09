@@ -53,7 +53,7 @@ export class MyBody extends Component {
         await updateState()
 
         //Anfrage
-        makeServerUpdate(this.state.toServer, (a) => { this.setState(a) })
+        makeServerUpdate(this.state.toServer, (a) => { this.setState(a) }, this.ShowMessages)
     }
 
 

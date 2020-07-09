@@ -1,50 +1,71 @@
 export default class showMessages{
     constructor(setMainState){
         this.setMainState = setMainState
+        this.normalSpeed = 30
+        this.speed = this.normalSpeed
+        this.isTyping = false
     }
-    showMessages(answerPackege){
-        const speed = 30
-        let {preface, mainAnswer, last} = answerPackege
-        //console.log(answerPackege)
-        const setNewText = (text) => {
-            this.setMainState((old) => {
-                const newState = old
-                newState.messanges.push({text: text, key : newState.messanges.length, user: false})
-                return newState
-            })
-        }
-        const changeText = (c) => {
-            this.setMainState(old => {
-                const newState = old
-                newState.messanges[newState.messanges.length-1].text += c
-                return newState
-            })
-        }
-        const typeNewText = text => {
-            if(text.length > 0){
-                setNewText("")
-                for (const i in text){
-                    setTimeout(function(){changeText(text[i])}, speed*i)
-                }
+    setNewText(text){
+        this.setMainState((old) => {
+            const newState = old
+            newState.messanges.push({text: text, key : newState.messanges.length, user: false})
+            return newState
+        })
+    }
+    changeText(c){
+        this.setMainState(old => {
+            const newState = old
+            let i = 1
+            while(newState.messanges[newState.messanges.length-i].user === true){
+                i = i + 1
+            }
+            newState.messanges[newState.messanges.length-i].text += c
+            return newState
+        })
+    }
+    typeOneMessange(string,index, indexM){
+        if(string[indexM].length > 0){
+            if(index === 0){
+                this.setNewText(string[indexM][index])
+            }else{
+                this.changeText(string[indexM][index])
             }
         }
-
-        const emptyString = '__empty__'
-
-        if(preface === emptyString){
-            preface = ""
+        if(index < string[indexM].length-1){
+            setTimeout(i => this.typeOneMessange(string,index+1, indexM), this.speed)
+        }else if(indexM < 3-1){
+            setTimeout(i => this.typeOneMessange(string,0, indexM+1), this.speed)
+        }else{
+            this.isTyping = false
         }
-        if(mainAnswer === emptyString){
-            mainAnswer = ""
-        }
-        if(last === emptyString){
-            last = ""
-        }
-        const t1 = (preface.length+1)*speed
-        const t2 = (mainAnswer.length+1)*speed+t1
+    }
 
-        preface && typeNewText(preface)
-        mainAnswer && setTimeout(function(){typeNewText(mainAnswer)}, t1)
-        last && setTimeout(function(){typeNewText(last)}, t2)
+    showMessages(answerPackege){
+        if(this.isTyping === false){
+            this.isTyping = true
+            let {preface, mainAnswer, last} = answerPackege
+            //console.log(answerPackege)
+
+
+            const emptyString = '__empty__'
+
+            if(preface === emptyString){
+                preface = ""
+            }
+            if(mainAnswer === emptyString){
+                mainAnswer = ""
+            }
+            if(last === emptyString){
+                last = ""
+            }
+
+            this.typeOneMessange([preface, mainAnswer, last],0,0)
+        }else{
+            this.speed = 0.1
+            setTimeout(i => {
+                this.speed = this.normalSpeed
+                this.showMessages(answerPackege)
+            }, 1000)
+        }
     }
 }
