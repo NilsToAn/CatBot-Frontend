@@ -2,6 +2,7 @@
   "name": "catbot",
   "version": "0.1.0",
   "private": true,
+  "homepage": "DataCatBot",
   "dependencies": {
     "bootstrap": "^4.4.1",
     "react": "^16.11.0",

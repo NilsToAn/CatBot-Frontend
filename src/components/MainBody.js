@@ -16,10 +16,13 @@ export class MyBody extends Component {
         this.handleResultButton = this.handleResultButton.bind(this)
         this.state = firstMainState //in js Folder
         this.ShowMessages = new showMessages((a) => { this.setState(a) })
+        this.apiurl = 'http://localhost:8080'
+        //this.apiurl =  'http://travel-catbot.de:8080'
     }
 
     componentDidMount(){
         this.sendMessageToServer('start')
+        console.log(window.location.href)
     }
     
     async sendMessageToServer(mes){
@@ -72,7 +75,7 @@ export class MyBody extends Component {
     async handleResultButton(event) {
         //Result anfrage
         if (this.state.displayResult === false) {
-            const url = 'http://localhost:8080/request'
+            const url = this.apiurl+'/request'
             try {
                 const response = await fetch(url, {
                     method: "POST",

@@ -3,6 +3,7 @@ import handleServerState from './handleServerState'
 
 export default async function makeServerUpdate(mainStateToServer, setMainState, ShowMessages){
     const url = 'http://localhost:8080'
+    //const url = 'http://travel-catbot.de:8080'
     try {
         const response = await fetch(url, {
             method: "POST",
