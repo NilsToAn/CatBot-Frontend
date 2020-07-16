@@ -1,17 +1,21 @@
 export default class showMessages{
     constructor(setMainState){
         this.setMainState = setMainState
-        this.normalSpeed = 30
-        this.speed = this.normalSpeed
+        this.speed = 20
+        this.stopTyping = false
         this.isTyping = false
+        this.savedUserMes = null
+        this.savedAnswerPack = null
     }
-    setNewText(text){
+
+    setNewText(text, user){
         this.setMainState((old) => {
             const newState = old
-            newState.messanges.push({text: text, key : newState.messanges.length, user: false})
+            newState.messanges.push({text: text, key : newState.messanges.length, user: user})
             return newState
         })
     }
+
     changeText(c){
         this.setMainState(old => {
             const newState = old
@@ -23,20 +27,42 @@ export default class showMessages{
             return newState
         })
     }
+
     typeOneMessange(string,index, indexM){
-        if(string[indexM].length > 0){
-            if(index === 0){
-                this.setNewText(string[indexM][index])
+        console.log(string)
+        if(this.stopTyping === false){
+            if(string[indexM].length > 0){
+                if(index === 0){
+                    this.setNewText(string[indexM][index], false)
+                }else{
+                    this.changeText(string[indexM][index])
+                }
+            }
+            if(index < string[indexM].length-1){
+                setTimeout(i => this.typeOneMessange(string,index+1, indexM), this.speed)
+            }else if(indexM < 3-1){
+                setTimeout(i => this.typeOneMessange(string,0, indexM+1), this.speed)
             }else{
-                this.changeText(string[indexM][index])
+                this.isTyping = false
             }
         }
-        if(index < string[indexM].length-1){
-            setTimeout(i => this.typeOneMessange(string,index+1, indexM), this.speed)
-        }else if(indexM < 3-1){
-            setTimeout(i => this.typeOneMessange(string,0, indexM+1), this.speed)
-        }else{
+        else{
+            index === 0? this.setNewText(string[indexM]): this.changeText(string[indexM].substring(index), false)
+            for (let i = indexM+1; i < string.length; i++) {
+                this.setNewText(string[i], false)
+            }
+            this.stopTyping = false
             this.isTyping = false
+            this.savedUserMes && this.showUserMessage(this.savedUserMes)
+            this.savedAnswerPack && this.showMessages(this.savedAnswerPack)
+        }
+    }
+
+    showUserMessage(text){
+        if(this.isTyping === false){
+            this.setNewText(text, true)
+        }else{
+            this.savedUserMes = text
         }
     }
 
@@ -49,23 +75,20 @@ export default class showMessages{
 
             const emptyString = '__empty__'
 
-            if(preface === emptyString){
+            if(!preface || preface === emptyString){
                 preface = ""
             }
-            if(mainAnswer === emptyString){
+            if(!mainAnswer || mainAnswer === emptyString){
                 mainAnswer = ""
             }
-            if(last === emptyString){
+            if(!last || last === emptyString){
                 last = ""
             }
 
             this.typeOneMessange([preface, mainAnswer, last],0,0)
         }else{
-            this.speed = 0.1
-            setTimeout(i => {
-                this.speed = this.normalSpeed
-                this.showMessages(answerPackege)
-            }, 1000)
+            this.stopTyping = true
+            this.savedAnswerPack = answerPackege
         }
     }
 }

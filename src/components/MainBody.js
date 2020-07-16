@@ -44,7 +44,8 @@ export class MyBody extends Component {
         const updateState = async () => {
             this.setState((old) => {
                 const newState = old
-                newState.messanges.push({ text: mes, key: newState.messanges.length, user: true })
+                this.ShowMessages.showUserMessage(mes)
+                //newState.messanges.push({ text: mes, key: newState.messanges.length, user: true })
                 newState.textarea = ""
                 newState.toServer.message = mes
                 return newState
