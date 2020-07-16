@@ -18,7 +18,6 @@ export default function MyEmotionPic(props) {
         let opCont = opacity
         let fade = setInterval(() =>
             {
-                console.log(state, opacity, opCont)
                 if(state === 'fadeOut'){
                     if(opCont < 0.1){
                         state = 'changePic'

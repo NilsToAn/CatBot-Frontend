@@ -6,6 +6,7 @@ export default class showMessages{
         this.isTyping = false
         this.savedUserMes = null
         this.savedAnswerPack = null
+        this.nextFunc = null
     }
 
     setNewText(text, user){
@@ -39,9 +40,11 @@ export default class showMessages{
             }
             if(index < string[indexM].length-1){
                 setTimeout(i => this.typeOneMessange(string,index+1, indexM), this.speed)
-            }else if(indexM < 3-1){
+            }else if(indexM < string.length-1){
                 setTimeout(i => this.typeOneMessange(string,0, indexM+1), this.speed)
             }else{
+                this.nextFunc && this.nextFunc()
+                this.nextFunc = null
                 this.isTyping = false
             }
         }
@@ -65,12 +68,13 @@ export default class showMessages{
         }
     }
 
-    showMessages(answerPackege){
+    showMessages(answerPackege, nextFunc = null){
+        if(nextFunc){
+            this.nextFunc = nextFunc
+        }
         if(this.isTyping === false){
             this.isTyping = true
             let {preface, mainAnswer, last} = answerPackege
-            //console.log(answerPackege)
-
 
             const emptyString = '__empty__'
 

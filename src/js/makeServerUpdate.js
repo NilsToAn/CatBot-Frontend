@@ -15,9 +15,10 @@ export default async function makeServerUpdate(mainStateToServer, setMainState, 
         const json = await response.json()
         //Verarbeitung
         const [informationPackage, answerPackege] = processResponse(json)
-        ShowMessages.showMessages(answerPackege)
-
-        handleServerState(informationPackage.state, mainStateToServer, setMainState)
+        ShowMessages.showMessages(
+            answerPackege, 
+            () => {handleServerState(informationPackage.state, mainStateToServer, setMainState, ShowMessages)}
+            )
         
         //showResult(resultPackage, (a) => {this.setState(old => Object.assign({},old,{results: a}))})
         setMainState((old) => {

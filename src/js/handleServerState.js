@@ -1,12 +1,13 @@
 import makeServerUpdate from './makeServerUpdate'
 
-export default function handleServerState(serverState, mainStateToServer, setMainState){
-    const statesToSkip = ['chatbots']
-    const time = 15000
+export default function handleServerState(serverState, mainStateToServer, setMainState, ShowMessanges){
+    const statesToSkip = ['chatbots','query','pet']
+    const time = 150
 
     console.log(serverState)
     if(statesToSkip.includes(serverState)){
         console.log('skip')
-        setTimeout(function(){makeServerUpdate(mainStateToServer, setMainState)}, time)
+        console.log(mainStateToServer)
+        setTimeout(function(){makeServerUpdate(mainStateToServer, setMainState, ShowMessanges)}, time)
     }
 }
