@@ -29,7 +29,6 @@ export default class showMessages{
     }
 
     typeOneMessange(string,index, indexM){
-        console.log(string)
         if(this.stopTyping === false){
             if(string[indexM].length > 0){
                 if(index === 0){
