@@ -23,8 +23,9 @@ export default function MyEmotionPic(props) {
                     if(opCont < 0.1){
                         state = 'changePic'
                     }else{
-                        setOpacity(old => old-0.05)
-                        opCont -= 0.05
+                        opCont *= 0.8
+                        setOpacity(opCont)
+                        
                     }
                 }else if(state === 'changePic'){
                     setShowEmotion(props.emotion)
@@ -33,12 +34,12 @@ export default function MyEmotionPic(props) {
                     if(opCont > 0.99){
                         clearInterval(fade)
                     }else{
-                        setOpacity(old => old+0.05)
-                        opCont += 0.05
+                        setOpacity(opCont)
+                        opCont *= 1.2
                     }
                 }
             }
-        , 100);
+        , 50);
     }
     switch (showEmotion) {
         case "happy":
