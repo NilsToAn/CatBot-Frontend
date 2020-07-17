@@ -15,8 +15,8 @@ export class MyBody extends Component {
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleResultButton = this.handleResultButton.bind(this)
         this.state = firstMainState //in js Folder
-        this.ShowMessages = new showMessages((a) => { this.setState(a) })
         this.apiurl = 'http://localhost:8080'
+        this.ShowMessages = new showMessages((a) => { this.setState(a) })
         //this.apiurl =  'http://travel-catbot.de:8080'
     }
 
@@ -48,7 +48,6 @@ export class MyBody extends Component {
             this.setState((old) => {
                 const newState = old
                 this.ShowMessages.showUserMessage(mes)
-                //newState.messanges.push({ text: mes, key: newState.messanges.length, user: true })
                 newState.textarea = ""
                 newState.toServer.message = mes
                 return newState
@@ -57,7 +56,12 @@ export class MyBody extends Component {
         await updateState()
 
         //Anfrage
-        makeServerUpdate(this.state.toServer, (a) => { this.setState(a) }, this.ShowMessages)
+        await makeServerUpdate(this.state.toServer, (a) => { this.setState(a) }, this.ShowMessages)
+        console.log(this.state.toServer.informationPackage.state)
+        if(this.state.toServer.informationPackage.state === 'query'){
+            await this.searchResults()
+            this.setState(old => (Object.assign({}, old, { displayResult: true })))
+        }
     }
 
 
@@ -72,10 +76,9 @@ export class MyBody extends Component {
         });
     }
 
-    async handleResultButton(event) {
-        //Result anfrage
-        if (this.state.displayResult === false) {
-            const url = this.apiurl+'/request'
+    async searchResults(){
+        const url = this.apiurl+'/request'
+        console.log('search startet', url)
             try {
                 const response = await fetch(url, {
                     method: "POST",
@@ -90,8 +93,16 @@ export class MyBody extends Component {
             catch{
 
             }
+    }
+
+    async handleResultButton(event) {
+        //Result anfrage
+        if (this.state.displayResult === false) {
+            this.searchResults()
+            this.setState(old => (Object.assign({}, old, { displayResult: true })))
+        }else{
+            this.setState(old => (Object.assign({}, old, { displayResult: false })))
         }
-        this.setState(old => (Object.assign({}, old, { displayResult: !old.displayResult })))
     }
 
     render() {
