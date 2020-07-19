@@ -1,12 +1,11 @@
 const firstMainState = {
-  results: { test: 'teste' },
+  results: {},
   displayResult: false,
-  messanges: [
-  ],
-  emotion: 'normal',
+  messanges: [],
+  emotion: 'happy',
   toServer: {
-    username: 'Felix', // name of the user
-    message: 'Hallo du Arsch. Wie gehts?', // current input
+    username: 'User', // name of the user
+    message: '', // current input
     informationPackage:
         {
           origin: ['Bochum','Dortmund'], // can be multiple citys, extra field for auto-complet via js-req
@@ -16,8 +15,6 @@ const firstMainState = {
           traveller: 1,
           budget: 0,
           transfers: 0,
-          requestDone: false, // bool, after true, fields can be overriden via nlu
-          jsRequest: ['open-window-for-dest', 'open-window-for-origin'], // sets extra windows for autocomplte
           state: '' // if users input can be inferred due to questions
         }
   }
