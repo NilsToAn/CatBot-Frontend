@@ -31,7 +31,7 @@ export default function ShowOneResult(props) {
                         <td></td>
                         <td>{r.arrival.time}</td>
                         <td>{r.destination}</td>
-                        <td>{"Umstiege"}</td>
+                        <td>{r.transfers}</td>
                     </tr>
                 </tbody>
             </table>
