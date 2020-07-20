@@ -1,3 +1,8 @@
 .oneResultTable {
     width: 100%;
+
+}
+.TabelContainer{
+    height: 50vh;
+    overflow-y: scroll;
 }
