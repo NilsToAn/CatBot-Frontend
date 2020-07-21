@@ -8,22 +8,45 @@ export default class ShowResult extends Component{
         collection: [],
         sortParams: {direction: undefined}
     }
-    componentDidUpdate(){
+    async componentDidUpdate(){
        if(this.props.results.length && this.props.results.length !== this.state.collection.length){
-           this.setState({collection: this.props.results})
+           const updateState = async function(setState, results){setState({collection: results})}
+           await updateState((o) => this.setState(o), this.props.results.map((o,i) => Object.assign(o,{key:i})))
+           this.handleColumnHeaderClick('price')
        }
     }
 
     handleColumnHeaderClick(sortKey) {
         const {collection,sortParams: { direction }} = this.state;
-
+        console.log(sortKey)
         // Check, what direction now should be
         const sortDirection = direction === "desc" ? "asc" : "desc";
+        let sortFunc = function(e) { return e.price}
+        switch (sortKey) {
+            case 'provider':
+                sortFunc = function(e) {return e.provider}
+                break;
+            case 'date':
+                sortFunc = function(e) {return e.departure.timestamp}
+                break;
+            case 'time':
+                sortFunc = function(e) {const res = e.departure.time.replace(':','.'); return parseFloat(res)}
+                break;
+            case 'price':
+                sortFunc = function(e) { return e.price}
+                break;
+            case 'dur':
+                sortFunc = function(e) {const res = e.dur.replace(':','.'); return parseFloat(res)}
+                break; 
+            default:
+                sortFunc = function(e) { return e.price}
+                break;
+        }
 
         // Sort collection  
         const sortedCollection = orderBy(
           collection,
-          ["sortKey"],
+          sortFunc,
           [sortDirection]
         );
 
@@ -37,13 +60,10 @@ export default class ShowResult extends Component{
       }
 
     render(){
-        let MyResultComponents = []
-        if(this.state.collection){
-            const {collection} = this.state
-            MyResultComponents = (collection.filter(o => o.arrival)).map(o => (
-                <ShowOneResult result={o} key={o.departure.timestamp}/>
-            ))
-        }
+        const MyResultComponents = this.state.collection ? 
+        (this.state.collection.filter(o => o.arrival)).map(o => (
+            <ShowOneResult result={o} key={o.key}/>
+        )) : []
     
     
 
@@ -53,8 +73,8 @@ export default class ShowResult extends Component{
                 <thead>
                     <tr>
                         <th onClick={() => this.handleColumnHeaderClick("provider")}>Anbieter</th>
-                        <th onClick={() => this.handleColumnHeaderClick("arrival")}>Tag</th>
-                        <th onClick={() => this.handleColumnHeaderClick("provider")}>Ab/An</th>
+                        <th onClick={() => this.handleColumnHeaderClick("date")}>Tag</th>
+                        <th onClick={() => this.handleColumnHeaderClick("time")}>Ab/An</th>
                         <th></th>
                         <th onClick={() => this.handleColumnHeaderClick("dur")}>Dauer/Umstiege</th>
                         <th onClick={() => this.handleColumnHeaderClick("price")}>Gesamtpreis</th>

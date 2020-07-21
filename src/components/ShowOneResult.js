@@ -7,7 +7,7 @@ export default function ShowOneResult(props) {
        <>
             <tr>
                 <td>{r.provider}</td>
-                <td>{r.arrival.date}</td>
+                <td>{r.departure.date}</td>
                 <td>{r.departure.time}</td>
                 <td>{r.origin}</td>
                 <td>{r.dur}</td>
