@@ -1,8 +1,12 @@
-.oneResultTable {
+.ResultTable {
     width: 100%;
-
+    background-color: rgba(255, 255, 255, 0.6);
 }
 .TabelContainer{
     height: 50vh;
     overflow-y: scroll;
+}
+.TableTop{
+    border-top-width: 1px;
+    border-top-style: solid;
 }

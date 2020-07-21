@@ -69,7 +69,7 @@ export default class ShowResult extends Component{
 
     return (
         <div className = "TabelContainer">
-            <table className = "oneResultTable">
+            <table className = "ResultTable">
                 <thead>
                     <tr>
                         <th onClick={() => this.handleColumnHeaderClick("provider")}>Anbieter</th>

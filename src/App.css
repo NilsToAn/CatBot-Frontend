@@ -1,6 +1,12 @@
+html {
+  font-size: 13px;
+  }
 body {
   background-image: url("trainBack.jpg");
+  width: 100%;
+  height: 100vh;
 }
 .App {
   text-align: center;
 }
+
