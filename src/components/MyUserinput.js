@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 //import 'react-bootstrap-typeahead/css/Typeahead.css';
+import {UserInputSytle, ButtonStyle} from '../js/styles'
 
 
 export default function MyUserinput(props) {
@@ -30,7 +31,6 @@ export default function MyUserinput(props) {
     return (
         <Form onSubmit={props.handleSubmit}>
             <Form.Group className='text-left'>
-                <Form.Label> Eingabe  </Form.Label>
                 {props.searchStation ?
                     <AsyncTypeahead
                         name="textarea"
@@ -53,14 +53,18 @@ export default function MyUserinput(props) {
                     />
                     :
                     <Form.Control
+                        style={UserInputSytle}
                         onKeyDown={(event) => { if (event.keyCode === 13) { props.handleSubmit(event); return false } }}
                         onChange={props.handleInputChange}
                         name="textarea"
                         as="textarea"
                         rows="3"
-                        value={props.textarea} />}
+                        value={props.textarea}
+                        placeholder="Eingabe"
+                        className="UserTextarea" 
+                        />}
             </Form.Group>
-            <Button variant="primary" type="submit">
+            <Button variant="primary" type="submit" style={ButtonStyle}>
                 Senden
         </Button>
         </Form>
