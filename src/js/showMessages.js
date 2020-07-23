@@ -69,6 +69,7 @@ export default class showMessages{
     }
 
     showMessages(answerPackege, nextFunc = null){
+        console.log(answerPackege)
         if(nextFunc){
             this.nextFunc = nextFunc
         }

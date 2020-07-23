@@ -44,6 +44,7 @@
   padding-left: 10px;
   padding-right: 10px;
   z-index: 2;
+  white-space: pre-line;
 }
 
 .message__time {
