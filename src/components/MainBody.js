@@ -62,11 +62,15 @@ export class MyBody extends Component {
             await this.searchResults()
             this.setState(old => (Object.assign({}, old, { displayResult: true })))
         }
+        if(this.state.toServer.informationPackage.state === 'origincorr' || this.state.toServer.informationPackage.state === 'destinationcorr' ){
+            this.setState(old => (Object.assign({}, old, { searchStation: true })))
+        }else{
+            this.setState(old => (Object.assign({}, old, { searchStation: false })))
+        }
     }
 
 
     handleInputChange(event) {
-        //console.log(event)
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -120,7 +124,7 @@ export class MyBody extends Component {
                             handleSubmit={this.handleSubmit}
                             handleInputChange={this.handleInputChange}
                             textarea={this.state.textarea}
-                            searchStation={false} />
+                            searchStation={this.state.searchStation} />
                     </div>
                     {this.state.displayResult ? <div style={{ float: "left", width: "50%" }}>
                         <ShowResults results={this.state.results} />

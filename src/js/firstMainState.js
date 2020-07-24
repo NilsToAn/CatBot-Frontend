@@ -1,5 +1,6 @@
 const firstMainState = {
   results: {},
+  searchStation: false,
   displayResult: false,
   messanges: [],
   emotion: 'happy',

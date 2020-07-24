@@ -50,7 +50,9 @@ export default class DisplayPart extends Component {
             <Button name="infoButton" onClick={this.handleClick} style={ButtonStyle}><Figure.Image name="infoButton" src={notizpic} width={20}/></Button>
           </div>
           <div className="MessageContainer" style={MessageListStyle}>
-            {this.state.showMessanges ? <MessageList messanges={this.props.messanges} lastRef={this.messagesEndRef}/> : <ShowInfos infos={this.props.infos} />}
+            {this.state.showMessanges 
+             ?<MessageList messanges={this.props.messanges} lastRef={this.messagesEndRef}/> 
+             : <ShowInfos infos={this.props.infos} />}
           </div>
         </div>
       </Fragment>
