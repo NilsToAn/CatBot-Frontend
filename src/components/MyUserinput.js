@@ -6,7 +6,8 @@ import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 import {UserInputSytle, ButtonStyle} from '../js/styles'
 
 
-export default function MyUserinput(props) {
+function MyUserinput(props) {
+    console.log('input render')
     const [isLoading, setIsLoading] = useState(false);
     const [options, setOptions] = useState([]);
 
@@ -71,3 +72,5 @@ export default function MyUserinput(props) {
     )
 
 }
+
+export default React.memo(MyUserinput)

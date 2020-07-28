@@ -7,7 +7,8 @@ import thinkingPic from '../pics/thinking.png'
 import writerPic from '../pics/writer.png'
 
 
-export default function MyEmotionPic(props) {
+function MyEmotionPic(props) {
+    console.log('emotion render')
     let pic = ""
     const [opacity, setOpacity] = useState(1)
     const [lastEmotion, setLastEmotion] = useState('happy')
@@ -67,3 +68,5 @@ export default function MyEmotionPic(props) {
     </Figure>
     )
 }
+
+export default React.memo(MyEmotionPic)

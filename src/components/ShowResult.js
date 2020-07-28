@@ -1,9 +1,9 @@
-import React, {Component} from 'react'
+import React from 'react'
 import ShowOneResult from './ShowOneResult'
 import { orderBy } from "lodash";
 
 
-export default class ShowResult extends Component{
+export default class ShowResult extends React.PureComponent{
     state = {
         collection: [],
         sortParams: {direction: undefined}
@@ -60,6 +60,7 @@ export default class ShowResult extends Component{
       }
 
     render(){
+        console.log('show results')
         const MyResultComponents = this.state.collection ? 
         (this.state.collection.filter(o => o.arrival)).map(o => (
             <ShowOneResult result={o} key={o.key}/>
