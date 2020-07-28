@@ -9,15 +9,15 @@ export default class showMessages{
         this.nextFunc = null
     }
 
-    setNewText(text, user){
+    setNewText(text, user, charsMissing){
         this.setMainState((old) => {
             const newState = old
-            newState.messanges.push({text: text, key : newState.messanges.length, user: user})
+            newState.messanges.push({text: text, key : newState.messanges.length, user, charsMissing})
             return newState
         })
     }
 
-    changeText(c){
+    changeText(c, charsMissing){
         this.setMainState(old => {
             const newState = old
             let i = 1
@@ -25,6 +25,7 @@ export default class showMessages{
                 i = i + 1
             }
             newState.messanges[newState.messanges.length-i].text += c
+            newState.messanges[newState.messanges.length-i].charsMissing = charsMissing
             return newState
         })
     }
@@ -32,10 +33,13 @@ export default class showMessages{
     typeOneMessange(string,index, indexM){
         if(this.stopTyping === false){
             if(string[indexM].length > 0){
+                let wordlen = string[indexM].substring(index, string[indexM].length).indexOf(' ')
+                wordlen = wordlen < 1? 1 : wordlen
+                let charsmissing = string[indexM].substring(index+1, index+wordlen)
                 if(index === 0){
-                    this.setNewText(string[indexM][index], false)
+                    this.setNewText(string[indexM][index], false, charsmissing)
                 }else{
-                    this.changeText(string[indexM][index])
+                    this.changeText(string[indexM][index], charsmissing )
                 }
             }
             if(index < string[indexM].length-1){
@@ -51,7 +55,7 @@ export default class showMessages{
         else{
             index === 0? this.setNewText(string[indexM]): this.changeText(string[indexM].substring(index), false)
             for (let i = indexM+1; i < string.length; i++) {
-                this.setNewText(string[i], false)
+                this.setNewText(string[i], false, 0)
             }
             this.stopTyping = false
             this.isTyping = false
