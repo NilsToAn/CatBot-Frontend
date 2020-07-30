@@ -22,3 +22,6 @@
 .TextBeforTabelCity{
     font-size: large;
 }
+.MarkedColumn {
+    font-weight: bold
+}

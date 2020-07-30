@@ -6,7 +6,8 @@ import { orderBy } from "lodash";
 export default class ShowResult extends React.PureComponent{
     state = {
         collection: [],
-        sortParams: {direction: undefined}
+        sortParams: {direction: undefined},
+        classObj: {}
     }
 
     static getDerivedStateFromProps(props, state){
@@ -21,7 +22,7 @@ export default class ShowResult extends React.PureComponent{
 
     handleColumnHeaderClick(sortKey) {
         const {collection,sortParams: { direction }} = this.state;
-        console.log(sortKey)
+        this.setState({sortKey})
         // Check, what direction now should be
         const sortDirection = direction === "desc" ? "asc" : "desc";
         let sortFunc = function(e) { return e.price}
@@ -55,6 +56,18 @@ export default class ShowResult extends React.PureComponent{
                 break;
         }
 
+        const marked = "MarkedColumn"
+
+        let providerClass = sortKey === "provider" ? marked: ""
+        let dateClass = sortKey === "date" ? marked: ""
+        let originClass = sortKey === "origin" ? marked: ""
+        let deptimeClass = sortKey === "deptime" ? marked: ""
+        let arrtimeClass = sortKey === "arrtime" ? marked: ""
+        let durClass = sortKey === "dur" ? marked: ""
+        let transfersClass = sortKey === "transfers" ? marked: ""
+        let priceClass = sortKey === "price" ? marked: ""
+
+        this.setState((old) => Object.assign(old,{classObj:{providerClass, dateClass, originClass, deptimeClass, arrtimeClass, durClass, transfersClass, priceClass}}))
         // Sort collection  
         const sortedCollection = orderBy(
           collection,
@@ -75,7 +88,7 @@ export default class ShowResult extends React.PureComponent{
         console.log('show results')
         const MyResultComponents = this.state.collection ? 
         (this.state.collection.filter(o => o.arrival)).map(o => (
-            <ShowOneResult result={o} key={o.arrival.timestamp}/>
+            <ShowOneResult result={o} key={o.arrival.timestamp} classObj={this.state.classObj}/>
         )) : []
     
     
