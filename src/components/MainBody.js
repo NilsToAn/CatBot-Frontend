@@ -92,7 +92,8 @@ export class MyBody extends Component {
                     }
                 })
                 const json = await response.json()
-                showResult(json, (a) => { this.setState(old => Object.assign({}, old, { results: a })) })
+                await showResult(json, (a) => { this.setState(old => Object.assign({}, old, { results: a })) })
+                console.log(this.state.results)
             }
             catch{
 
@@ -102,8 +103,8 @@ export class MyBody extends Component {
     async handleResultButton(event) {
         //Result anfrage
         if (this.state.displayResult === false) {
-            this.searchResults()
-            this.setState(old => (Object.assign({}, old, { displayResult: true })))
+            await this.searchResults()
+            this.setState(old => (Object.assign({}, old, { displayResult: true, refreshShowResult: !old.refreshShowResult })))
         }else{
             this.setState(old => (Object.assign({}, old, { displayResult: false })))
         }
@@ -127,7 +128,7 @@ export class MyBody extends Component {
                             searchStation={this.state.searchStation} />
                     </div>
                     {this.state.displayResult ? <div style={{ float: "left", width: "50%" }}>
-                        <ShowResults results={this.state.results} />
+                        <ShowResults results={this.state.results}/>
                     </div> : null}
                 </div>
             </Fragment>

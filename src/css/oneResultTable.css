@@ -6,7 +6,19 @@
     height: 50vh;
     overflow-y: scroll;
 }
-.TableTop{
+.OneResultTable{
     border-top-width: 1px;
     border-top-style: solid;
+}
+.TableColumnTwo {
+    background-color: rgba(255, 255, 255, 0.6);
+}
+.TableHeader {
+    cursor: pointer
+}
+.TextBeforTabel{
+    font-size: medium;
+}
+.TextBeforTabelCity{
+    font-size: large;
 }

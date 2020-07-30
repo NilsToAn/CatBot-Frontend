@@ -8,7 +8,6 @@ import writerPic from '../pics/writer.png'
 
 
 function MyEmotionPic(props) {
-    console.log('emotion render')
     let pic = ""
     const [opacity, setOpacity] = useState(1)
     const [lastEmotion, setLastEmotion] = useState('happy')

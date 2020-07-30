@@ -4,22 +4,15 @@ import '../css/oneResultTable.css'
 export default function ShowOneResult(props) {
     const r = props.result
     return (
-       <>
-            <tr className="OneResultTable TableTop">
+            <tr className="OneResultTable">
                 <td>{r.provider}</td>
-                <td>{r.departure.date}</td>
-                <td>{r.departure.time}</td>
+                <td className="TableColumnTwo">{r.departure.date}</td>
                 <td>{r.origin}</td>
-                <td>{r.dur}</td>
-                <td>{r.price}</td>
-            </tr>
-            <tr className="OneResultTable TableBottum">
-                <td></td>
-                <td></td>
+                <td className="TableColumnTwo">{r.departure.time}</td>
                 <td>{r.arrival.time}</td>
-                <td>{r.destination}</td>
-                <td>{r.transfers}</td>
+                <td className="TableColumnTwo">{r.dur}</td>
+                <td >{r.transfers}</td>
+                <td className="TableColumnTwo">{r.price}</td>
             </tr>
-        </>
     )
 }

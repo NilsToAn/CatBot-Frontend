@@ -7,7 +7,6 @@ import {UserInputSytle, ButtonStyle} from '../js/styles'
 
 
 function MyUserinput(props) {
-    console.log('input render')
     const [isLoading, setIsLoading] = useState(false);
     const [options, setOptions] = useState([]);
 
