@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component} from 'react'
 import firstMainState from '../js/firstMainState'
 import makeServerUpdate from '../js/makeServerUpdate'
 import MyUserinput from './MyUserinput'
@@ -7,6 +7,8 @@ import MyEmotionPic from './MyEmotionPic'
 import DisplayPart from './DisplayPart'
 import ShowResults from './ShowResult'
 import showMessages from '../js/showMessages'
+import Container from 'react-bootstrap/Container';
+import { Row, Col } from 'react-bootstrap'
 
 export class MyBody extends Component {
     constructor(props) {
@@ -112,10 +114,14 @@ export class MyBody extends Component {
 
     render() {
         return (
-            <Fragment>
-                <MyEmotionPic emotion={this.state.emotion} />
-                <div style={{ overflow: "hidden" }}>
-                    <div style={{ width: this.state.displayResult ? "50%" : "100%", float: 'left' }}>
+            <Container>
+                <Row className="justify-content-md-center">
+                    <Col md='auto'>
+                        <MyEmotionPic emotion={this.state.emotion} />
+                    </Col>
+                </Row>
+                <Row style={{ overflow: "hidden" }}>
+                    <Col xl={ this.state.displayResult ? 6 : 12} lg={12}>
                         <DisplayPart
                             messanges={this.state.messanges}
                             infos={this.state.toServer.informationPackage}
@@ -126,12 +132,13 @@ export class MyBody extends Component {
                             handleInputChange={this.handleInputChange}
                             textarea={this.state.textarea}
                             searchStation={this.state.searchStation} />
-                    </div>
-                    {this.state.displayResult ? <div style={{ float: "left", width: "50%" }}>
+                    </Col>
+                    {this.state.displayResult ? 
+                    <Col lg={12} xl={6}>
                         <ShowResults results={this.state.results}/>
-                    </div> : null}
-                </div>
-            </Fragment>
+                    </Col> : null}
+                </Row>
+            </Container>
         )
     }
 }

@@ -14,7 +14,9 @@ export default class ShowResult extends React.PureComponent{
         const {results} = props
         if(results.length && results.length !== state.collection.length){
             const sortedRes = orderBy(results, "price", ["asc"])
-            return {collection: sortedRes}
+            return {collection: sortedRes, 
+                    sortParams: {direction: "asc"}, 
+                    classObj:{priceClass:"MarkedColumn"}}
         }else{
             return false
         }
