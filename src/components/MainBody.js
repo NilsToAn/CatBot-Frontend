@@ -61,8 +61,8 @@ export class MyBody extends Component {
         await makeServerUpdate(this.state.toServer, (a) => { this.setState(a) }, this.ShowMessages)
         console.log(this.state.toServer.informationPackage.state)
         if(this.state.toServer.informationPackage.state === 'query'){
-            await this.searchResults()
             this.setState(old => (Object.assign({}, old, { displayResult: true })))
+            this.searchResults()
         }
         if(this.state.toServer.informationPackage.state === 'origincorr' || this.state.toServer.informationPackage.state === 'destinationcorr' ){
             this.setState(old => (Object.assign({}, old, { searchStation: true })))
@@ -83,6 +83,8 @@ export class MyBody extends Component {
     }
 
     async searchResults(){
+        console.log('starte suche')
+        this.setState(old => Object.assign({}, old,{results:[]}))
         const url = this.apiurl+'/request'
         console.log('search startet', url)
             try {
@@ -105,7 +107,7 @@ export class MyBody extends Component {
     async handleResultButton(event) {
         //Result anfrage
         if (this.state.displayResult === false) {
-            await this.searchResults()
+            this.searchResults()
             this.setState(old => (Object.assign({}, old, { displayResult: true, refreshShowResult: !old.refreshShowResult })))
         }else{
             this.setState(old => (Object.assign({}, old, { displayResult: false })))
@@ -116,9 +118,10 @@ export class MyBody extends Component {
         return (
             <Container>
                 <Row className="justify-content-md-center">
-                    <Col md='auto'>
+                    <Col xl={ this.state.displayResult ? 6 : 12} lg={12}>
                         <MyEmotionPic emotion={this.state.emotion} />
                     </Col>
+                    {this.state.displayResult ? <Col lg={12} xl={6}> </Col> : null}
                 </Row>
                 <Row style={{ overflow: "hidden" }}>
                     <Col xl={ this.state.displayResult ? 6 : 12} lg={12}>
@@ -135,7 +138,7 @@ export class MyBody extends Component {
                     </Col>
                     {this.state.displayResult ? 
                     <Col lg={12} xl={6}>
-                        <ShowResults results={this.state.results}/>
+                        <ShowResults results={this.state.results} dest={this.state.toServer.informationPackage.destination}/>
                     </Col> : null}
                 </Row>
             </Container>

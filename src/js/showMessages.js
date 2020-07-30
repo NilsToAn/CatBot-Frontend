@@ -55,7 +55,7 @@ export default class showMessages{
         else{
             index === 0? this.setNewText(string[indexM]): this.changeText(string[indexM].substring(index), false)
             for (let i = indexM+1; i < string.length; i++) {
-                this.setNewText(string[i], false, 0)
+                string[i].lenght && this.setNewText(string[i], false, 0)
             }
             this.stopTyping = false
             this.isTyping = false

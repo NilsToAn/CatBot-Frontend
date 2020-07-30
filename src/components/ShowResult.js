@@ -13,7 +13,8 @@ export default class ShowResult extends React.PureComponent{
     static getDerivedStateFromProps(props, state){
         const {results} = props
         if(results.length && results.length !== state.collection.length){
-            const sortedRes = orderBy(results, "price", ["asc"])
+            let resultwithKey = results.map((o,i) => Object.assign(o,{key:i}))
+            const sortedRes = orderBy(resultwithKey, "price", ["asc"])
             return {collection: sortedRes, 
                     sortParams: {direction: "asc"}, 
                     classObj:{priceClass:"MarkedColumn"}}
@@ -69,7 +70,18 @@ export default class ShowResult extends React.PureComponent{
         let transfersClass = sortKey === "transfers" ? marked: ""
         let priceClass = sortKey === "price" ? marked: ""
 
-        this.setState((old) => Object.assign(old,{classObj:{providerClass, dateClass, originClass, deptimeClass, arrtimeClass, durClass, transfersClass, priceClass}}))
+        this.setState((old) => Object.assign(old, {
+            classObj: {
+                providerClass,
+                dateClass,
+                originClass,
+                deptimeClass,
+                arrtimeClass,
+                durClass,
+                transfersClass,
+                priceClass
+            }
+        }))
         // Sort collection  
         const sortedCollection = orderBy(
           collection,
@@ -90,8 +102,9 @@ export default class ShowResult extends React.PureComponent{
         console.log('show results')
         const MyResultComponents = this.state.collection ? 
         (this.state.collection.filter(o => o.arrival)).map(o => (
-            <ShowOneResult result={o} key={o.arrival.timestamp} classObj={this.state.classObj}/>
+            <ShowOneResult result={o} key={o.key} classObj={this.state.classObj}/>
         )) : []
+        console.log(MyResultComponents.length)
     
     
 
@@ -99,8 +112,9 @@ export default class ShowResult extends React.PureComponent{
         <>
         <span className="TextBeforTabel">
             Deine Reise nach 
-            <span className="TextBeforTabelCity"> {this.state.collection[0].destination}</span>
+            <span className="TextBeforTabelCity"> {this.props.dest}</span>
         </span>
+        {MyResultComponents.length ?
         <div className = "TabelContainer">
             <table className = "ResultTable">
                 <thead>
@@ -110,7 +124,7 @@ export default class ShowResult extends React.PureComponent{
                             onClick={() => this.handleColumnHeaderClick("provider")}
                             >Anbieter</th>
                         <th 
-                            className = "TableHeader"
+                            className = "TableHeader TableColumnTwo"
                             onClick={() => this.handleColumnHeaderClick("date")}
                             >Tag</th>
                         <th 
@@ -118,23 +132,23 @@ export default class ShowResult extends React.PureComponent{
                             onClick={() => this.handleColumnHeaderClick("origin")}
                             >Abfahrtsort</th>
                         <th 
-                            className = "TableHeader"
+                            className = "TableHeader TableColumnTwo"
                             onClick={() => this.handleColumnHeaderClick("deptime")}
                             >Ab</th>
                         <th 
-                            className = "TableHeader"
+                            className = "TableHeader TableColumnTwo"
                             onClick={() => this.handleColumnHeaderClick("arrtime")}
                             >An</th>
                         <th 
-                            className = "TableHeader"
+                            className = "TableHeader TableColumnTwo"
                             onClick={() => this.handleColumnHeaderClick("dur")}
                             >Dauer</th>
                         <th 
-                            className = "TableHeader"
+                            className = "TableHeader TableColumnTwo"
                             onClick={() => this.handleColumnHeaderClick("transfers")}
                             >Umstiege</th>
                         <th 
-                            className = "TableHeader"
+                            className = "TableHeader TableColumnTwo"
                             onClick={() => this.handleColumnHeaderClick("price")}
                             >Gesamtpreis</th>
                     </tr>
@@ -143,7 +157,9 @@ export default class ShowResult extends React.PureComponent{
             {MyResultComponents}
             </tbody>
             </table>
-        </div>
+        </div> 
+        : <div>Lädt...</div>
+    }
         </>
     )
 }
