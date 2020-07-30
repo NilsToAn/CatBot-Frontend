@@ -136,7 +136,7 @@ export default class ShowResult extends React.PureComponent{
                             onClick={() => this.handleColumnHeaderClick("deptime")}
                             >Ab</th>
                         <th 
-                            className = "TableHeader TableColumnTwo"
+                            className = "TableHeader"
                             onClick={() => this.handleColumnHeaderClick("arrtime")}
                             >An</th>
                         <th 
@@ -144,7 +144,7 @@ export default class ShowResult extends React.PureComponent{
                             onClick={() => this.handleColumnHeaderClick("dur")}
                             >Dauer</th>
                         <th 
-                            className = "TableHeader TableColumnTwo"
+                            className = "TableHeader"
                             onClick={() => this.handleColumnHeaderClick("transfers")}
                             >Umstiege</th>
                         <th 
