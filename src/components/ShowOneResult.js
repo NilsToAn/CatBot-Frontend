@@ -13,7 +13,7 @@ export default function ShowOneResult(props) {
                 <td className={c.arrtimeClass}>{r.arrival.time}</td>
                 <td className={c.durClass+" TableColumnTwo"}>{r.dur}</td>
                 <td className={c.transfersClass}>{r.transfers}</td>
-                <td className={c.priceClass+" TableColumnTwo"}>{r.price}</td>
+                <td className={c.priceClass+" TableColumnTwo"}>{r.priceStr}</td>
             </tr>
     )
 }

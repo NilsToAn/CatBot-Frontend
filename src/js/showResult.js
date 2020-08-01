@@ -12,12 +12,20 @@ export default function showResult(resultPackage, setResult){
         const getFullDate = (a) => (
             a.getDate()+'.'+a.getMonth()+'.'+a.getFullYear()
         )
+        const formatPrice = (a) => {
+            const price = a.toString()
+            const resPrice = price.length === 4? price+"0 €": price+" €"
+            console.log(a, price, resPrice)
+            return resPrice
+        }
 
         resultPackage[i].arrival.date = getFullDate(arrDate)
         resultPackage[i].arrival.time = getTime(arrDate)
 
         resultPackage[i].departure.date = getFullDate(depDate)
         resultPackage[i].departure.time = getTime(depDate)
+
+        resultPackage[i].priceStr = formatPrice(resultPackage[i].price)
 
 
         const durMin = resultPackage[i].duration.minutes < 10 ? "0"+resultPackage[i].duration.minutes : resultPackage[i].duration.minutes
