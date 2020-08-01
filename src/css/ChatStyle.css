@@ -60,3 +60,22 @@
 .MessageContainer {
   overflow-y: scroll;
 }
+.ShowInfos {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.BottomButtonContainer {
+  position: relative;
+}
+.ButtonContainer {
+  position: relative;
+  right:0;
+  z-index: 20;
+  float: right;
+}
+

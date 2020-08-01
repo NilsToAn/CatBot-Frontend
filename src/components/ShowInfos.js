@@ -5,7 +5,7 @@ import sortInfos from '../js/sortInfos'
 export default function ShowInfos(props) {
     const rows = sortInfos(props.infos)
     return (
-        <Table className="border rounded-lg">
+        <Table className="border rounded-lg  ShowInfos" style={props.style}>
             <tbody>
                 {rows.map((o)=>(o[1]?
                         <tr key={o[0]}>
