@@ -12,7 +12,6 @@ export default function MessageList (props) {
         {props.messanges.map((message) =>
           (<OneMessage key={message.key} data={{ user: message.user, text: message.text, charsMissing: message.charsMissing }}>
           </OneMessage>))}
-          <div ref={props.lastRef} />
       </div>
     </section>
   )

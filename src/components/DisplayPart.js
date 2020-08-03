@@ -12,12 +12,12 @@ export default class DisplayPart extends Component {
 
   constructor (props) {
     super(props)
-    this.messagesEndRef = React.createRef()
     this.handleClick = this.handleClick.bind(this)
     this.scrollToBottom = this.scrollToBottom.bind(this)
     this.state = {
-      showMessanges: true
+      showMessanges: true,
     }
+    this.myMessageContainerRef = React.createRef();
   }
 
   handleClick (event) {
@@ -38,7 +38,12 @@ export default class DisplayPart extends Component {
     this.scrollToBottom()
   }
   scrollToBottom = () => {
-    this.messagesEndRef.current && this.messagesEndRef.current.scrollIntoView()
+    let {scrollHeight, clientHeight, scrollTop} = this.myMessageContainerRef.current
+    const maxScrollTop = scrollHeight - clientHeight;
+    console.log(scrollTop , maxScrollTop)
+    if(scrollTop > maxScrollTop - 40){
+      this.myMessageContainerRef.current.scrollTop = maxScrollTop
+    }
   }
 
   render () {
@@ -50,8 +55,8 @@ export default class DisplayPart extends Component {
           </div>
           <div className="BottomButtonContainer">
             <ShowInfos infos={this.props.infos} style={this.state.showMessanges ? {visibility:'collapse'}:null}/>
-            <div className="MessageContainer" style={MessageListStyle}>
-             <MessageList messanges={this.props.messanges} lastRef={this.messagesEndRef}/> 
+            <div className="MessageContainer" style={MessageListStyle} ref={this.myMessageContainerRef}>
+             <MessageList messanges={this.props.messanges}/> 
             </div>
         </div>
         </div>
