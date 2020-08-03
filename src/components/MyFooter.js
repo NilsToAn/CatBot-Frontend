@@ -1,6 +1,9 @@
 import React from 'react'
 import '../css/MyFooter.css'
 import { Container, Row, Col } from 'react-bootstrap'
+import {
+    Link
+  } from "react-router-dom";
 
 export default function MyFooter(){
     return (
@@ -8,13 +11,13 @@ export default function MyFooter(){
             <Container className='FooterContainer'>
                 <Row >
                     <Col className="text-center">
-                        <a href='/ueberuns'>Über uns</a>
+                        <Link to='/ueberuns'>Über uns</Link>
                     </Col>
                     <Col className="text-center">
-                        <a href='/impressum'>Impressum</a>
+                        <Link to='/impressum'>Impressum</Link>
                     </Col>
                     <Col className="text-center">
-                        <a href='/conni'>Künstlerin</a>
+                        <Link to='/conni'>Künstlerin</Link>
                     </Col>
                 </Row>
             </Container>
