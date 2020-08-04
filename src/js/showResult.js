@@ -15,7 +15,6 @@ export default function showResult(resultPackage, setResult){
         const formatPrice = (a) => {
             const price = a.toString()
             const resPrice = price.length === 4? price+"0 €": price+" €"
-            console.log(a, price, resPrice)
             return resPrice
         }
 
