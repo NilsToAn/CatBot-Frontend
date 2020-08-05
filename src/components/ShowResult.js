@@ -110,10 +110,12 @@ export default class ShowResult extends React.PureComponent{
 
     return (
         <>
+        <div className="TabelHeaderDiv">
         <span className="TextBeforTabel">
             Deine Reise nach 
-            <span className="TextBeforTabelCity"> {this.props.dest}</span>
+        <span className="TextBeforTabelCity"> {this.props.dest}</span>
         </span>
+        </div>
         {MyResultComponents.length ?
         <div className = "TabelContainer">
             <table className = "ResultTable">
