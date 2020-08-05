@@ -10,7 +10,7 @@ export default function showResult(resultPackage, setResult){
             return(a.getHours()+':'+min)
         }
         const getFullDate = (a) => (
-            a.getDate()+'.'+a.getMonth()+'.'+a.getFullYear()
+            a.getDate()+'.'+(a.getMonth()+1)+'.'+a.getFullYear()
         )
         const formatPrice = (a) => {
             const price = a.toString()
