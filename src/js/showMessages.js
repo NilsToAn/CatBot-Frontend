@@ -1,5 +1,5 @@
 export default class showMessages{
-    constructor(setMainState){
+    constructor(setMainState, divMref){
         this.setMainState = setMainState
         this.speed = 20
         this.stopTyping = false
@@ -7,6 +7,7 @@ export default class showMessages{
         this.savedUserMes = null
         this.savedAnswerPack = null
         this.nextFunc = null
+        this.divMaxText = divMref.scrollWidth > 410? (410-20)*(34/39): (divMref.scrollWidth-20)*(34/39)
     }
 
     setNewText(text, user){
@@ -34,12 +35,11 @@ export default class showMessages{
             let newbreak = lastbreak
             if(string[indexM].length > 0){
                 let wordlen = string[indexM].substring(index, string[indexM].length).indexOf(' ')
-                wordlen = wordlen < 1? 1 : wordlen
+                
 
                 const colWidth = this.getTextWidth(string[indexM].substring(lastbreak, index+wordlen),'1rem')
-                console.log(colWidth)
                 let toAdd = ""
-                if (colWidth > 340){
+                if (colWidth > this.divMaxText){
                     toAdd = "\n"
                     newbreak = index
                 }

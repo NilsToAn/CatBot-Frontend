@@ -55,7 +55,7 @@ export default class DisplayPart extends Component {
           <div className="BottomButtonContainer">
             <ShowInfos infos={this.props.infos} style={this.state.showMessanges ? {visibility:'collapse'}:null}/>
             <div className="MessageContainer" style={MessageListStyle} ref={this.myMessageContainerRef}>
-             <MessageList messanges={this.props.messanges}/> 
+             <MessageList messanges={this.props.messanges} divMref={this.props.divMrev}/> 
             </div>
         </div>
         </div>

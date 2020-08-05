@@ -8,7 +8,7 @@ export default function MessageList (props) {
   //console.log(props)
   return (
     <section className="chat__body">
-      <div className="messages">
+      <div className="messages" ref={props.divMref}>
         {props.messanges.map((message) =>
           (<OneMessage key={message.key} data={{ user: message.user, text: message.text}}>
           </OneMessage>))}

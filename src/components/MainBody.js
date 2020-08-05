@@ -1,4 +1,4 @@
-import React, { Component} from 'react'
+import React, { Component, createRef} from 'react'
 import firstMainState from '../js/firstMainState'
 import makeServerUpdate from '../js/makeServerUpdate'
 import MyUserinput from './MyUserinput'
@@ -18,12 +18,13 @@ export class MyBody extends Component {
         this.handleResultButton = this.handleResultButton.bind(this)
         this.state = firstMainState //in js Folder
         this.apiurl = 'http://localhost:8080'
-        this.ShowMessages = new showMessages((a) => { this.setState(a) })
         //this.apiurl =  'http://travel-catbot.de:8080'
+        this.divMref = createRef(false)
     }
 
     componentDidMount(){
         this.sendMessageToServer('start')
+        this.ShowMessages = new showMessages((a) => { this.setState(a) }, this.divMref.current)
         console.log(window.location.href)
     }
     
@@ -129,6 +130,7 @@ export class MyBody extends Component {
                             messanges={this.state.messanges}
                             infos={this.state.toServer.informationPackage}
                             changeDisplayResult={this.handleResultButton}
+                            divMrev = {this.divMref}
                         />
                         <MyUserinput
                             handleSubmit={this.handleSubmit}
