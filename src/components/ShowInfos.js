@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 import sortInfos from '../js/sortInfos'
+import {infoTableStyle, ShowInfosTd} from '../js/styles'
 
 
 function ShowInfos(props) {
@@ -9,12 +10,12 @@ function ShowInfos(props) {
 
     return (
         <div className="ShowInfos" style={props.style}>
-        <Table className="border rounded-lg" >
+        <Table className="rounded-lg" style={infoTableStyle}>
             <tbody>
                 {rows.map((o)=>(o?
                         <tr key={o[0]}>
-                            <td>{o[0]}</td>
-                            <td>{o[1]}</td>
+                            <td style={ShowInfosTd}>{o[0]}</td>
+                            <td style={ShowInfosTd}>{o[1]}</td>
                         </tr>  : null
                     )
                 )}

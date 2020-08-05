@@ -53,16 +53,19 @@
 }
 .ShowInfos {
   width:auto;
+  max-width: 420px;
   position: absolute;
   margin:40px;
   margin-right: 20px;
+  padding: 4px;
   top: 0;
   right: 0;
   z-index: 10;
-  background-color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(223, 217, 212, 0.90);
   border-radius: 6px;
   float: right;
 }
+
 
 .BottomButtonContainer {
   position: relative;

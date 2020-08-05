@@ -35,6 +35,7 @@ export default class showMessages{
             let newbreak = lastbreak
             if(string[indexM].length > 0){
                 let wordlen = string[indexM].substring(index, string[indexM].length).indexOf(' ')
+                wordlen = wordlen === -1 ? string[indexM].length-index: wordlen
                 
 
                 const colWidth = this.getTextWidth(string[indexM].substring(lastbreak, index+wordlen),'1rem')
