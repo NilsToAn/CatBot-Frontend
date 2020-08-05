@@ -40,7 +40,6 @@ export default class DisplayPart extends Component {
   scrollToBottom = () => {
     let {scrollHeight, clientHeight, scrollTop} = this.myMessageContainerRef.current
     const maxScrollTop = scrollHeight - clientHeight;
-    console.log(scrollTop , maxScrollTop)
     if(scrollTop > maxScrollTop - 40){
       this.myMessageContainerRef.current.scrollTop = maxScrollTop
     }

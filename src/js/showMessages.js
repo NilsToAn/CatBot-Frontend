@@ -9,15 +9,15 @@ export default class showMessages{
         this.nextFunc = null
     }
 
-    setNewText(text, user, charsMissing){
+    setNewText(text, user){
         this.setMainState((old) => {
             const newState = old
-            newState.messanges.push({text: text, key : newState.messanges.length, user, charsMissing})
+            newState.messanges.push({text: text, key : newState.messanges.length, user})
             return newState
         })
     }
 
-    changeText(c, charsMissing){
+    changeText(c){
         this.setMainState(old => {
             const newState = old
             let i = 1
@@ -25,27 +25,37 @@ export default class showMessages{
                 i = i + 1
             }
             newState.messanges[newState.messanges.length-i].text += c
-            newState.messanges[newState.messanges.length-i].charsMissing = charsMissing
             return newState
         })
     }
 
-    typeOneMessange(string,index, indexM){
+    typeOneMessange(string,index, indexM, lastbreak){
         if(this.stopTyping === false){
+            let newbreak = lastbreak
             if(string[indexM].length > 0){
                 let wordlen = string[indexM].substring(index, string[indexM].length).indexOf(' ')
                 wordlen = wordlen < 1? 1 : wordlen
-                let charsmissing = string[indexM].substring(index+1, index+wordlen)
+
+                const colWidth = this.getTextWidth(string[indexM].substring(lastbreak, index+wordlen),'1rem')
+                console.log(colWidth)
+                let toAdd = ""
+                if (colWidth > 340){
+                    toAdd = "\n"
+                    newbreak = index
+                }
+                if(string[indexM][index] === '\n'){
+                    newbreak = index
+                }
                 if(index === 0){
-                    this.setNewText(string[indexM][index], false, charsmissing)
+                    this.setNewText(string[indexM][index], false)
                 }else{
-                    this.changeText(string[indexM][index], charsmissing )
+                    this.changeText(toAdd+string[indexM][index])
                 }
             }
             if(index < string[indexM].length-1){
-                setTimeout(i => this.typeOneMessange(string,index+1, indexM), this.speed)
+                setTimeout(i => this.typeOneMessange(string,index+1, indexM, newbreak), this.speed)
             }else if(indexM < string.length-1){
-                setTimeout(i => this.typeOneMessange(string,0, indexM+1), this.speed)
+                setTimeout(i => this.typeOneMessange(string,0, indexM+1, 0), this.speed)
             }else{
                 this.nextFunc && this.nextFunc()
                 this.nextFunc = null
@@ -92,10 +102,17 @@ export default class showMessages{
                 last = ""
             }
 
-            this.typeOneMessange([preface, mainAnswer, last],0,0)
+            this.typeOneMessange([preface, mainAnswer, last],0,0,0)
         }else{
             this.stopTyping = true
             this.savedAnswerPack = answerPackege
         }
+    }
+
+    getTextWidth(txt, font) {
+        this.element = document.createElement('canvas');
+        this.context = this.element.getContext("2d");
+        //this.context.font = font;
+        return this.context.measureText(txt).width;
     }
 }

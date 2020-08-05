@@ -10,7 +10,7 @@ export default function MessageList (props) {
     <section className="chat__body">
       <div className="messages">
         {props.messanges.map((message) =>
-          (<OneMessage key={message.key} data={{ user: message.user, text: message.text, charsMissing: message.charsMissing }}>
+          (<OneMessage key={message.key} data={{ user: message.user, text: message.text}}>
           </OneMessage>))}
       </div>
     </section>

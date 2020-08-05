@@ -5,6 +5,7 @@
 .TabelContainer{
     height: 50vh;
     overflow-y: scroll;
+    margin-bottom: 100px;
 }
 .OneResultTable{
     border-top-width: 1px;
