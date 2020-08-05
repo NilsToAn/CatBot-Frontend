@@ -49,7 +49,7 @@ export default class DisplayPart extends Component {
     return (
         <div className="DisplayConatainer">
           <div className="ButtonContainer">
-            <Button name="resultButton" onClick={this.handleClick} style={ButtonStyle}><Figure.Image width={20}/></Button>
+            {/*<Button name="resultButton" onClick={this.handleClick} style={ButtonStyle}><Figure.Image width={20}/></Button> */}
             <Button name="infoButton" onClick={this.handleClick} style={ButtonStyle}><Figure.Image name="infoButton" src={notizpic} width={20}/></Button>
           </div>
           <div className="BottomButtonContainer">

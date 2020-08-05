@@ -125,7 +125,7 @@ export class MyBody extends Component {
                     {this.state.displayResult ? <Col lg={12} xl={6}> </Col> : null}
                 </Row>
                 <Row style={{ overflow: "hidden" }}>
-                    <Col xl={ this.state.displayResult ? 6 : 12} lg={12}>
+                    <Col className="leftside" xl={ this.state.displayResult ? 6 : 12} lg={12}>
                         <DisplayPart
                             messanges={this.state.messanges}
                             infos={this.state.toServer.informationPackage}
