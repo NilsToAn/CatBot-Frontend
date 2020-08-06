@@ -12,7 +12,6 @@ function MyUserinput(props) {
 
     const handleSearch = (name) => {
         setIsLoading(true);
-
         fetch('http://localhost:8080/autofill', {
             method: "POST",
             body: JSON.stringify({ name }),
@@ -37,7 +36,7 @@ function MyUserinput(props) {
                         id="async-example"
                         isLoading={isLoading}
                         labelKey="login"
-                        minLength={3}
+                        minLength={2}
                         onSearch={handleSearch}
                         options={options}
                         placeholder="Suche nach Station"

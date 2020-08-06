@@ -38,9 +38,9 @@ export default class showMessages{
                 wordlen = wordlen === -1 ? string[indexM].length-index: wordlen
                 
 
-                const colWidth = this.getTextWidth(string[indexM].substring(lastbreak, index+wordlen),'1rem')
+                const colWidth = this.getTextWidth(string[indexM].substring(lastbreak, index+wordlen))
                 let toAdd = ""
-                if (colWidth > this.divMaxText){
+                if (string[indexM][index-1] === " " && colWidth > this.divMaxText){
                     toAdd = "\n"
                     newbreak = index
                 }
