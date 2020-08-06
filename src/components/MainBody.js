@@ -70,6 +70,9 @@ export class MyBody extends Component {
         }else{
             this.setState(old => (Object.assign({}, old, { searchStation: false })))
         }
+        if(this.state.toServer.informationPackage.state === 'or-again'){
+            this.setState(old => Object.assign({}, old, { results: [], displayResult: false, refreshShowResult: !old.refreshShowResult } ))
+        }
     }
 
 
@@ -97,8 +100,7 @@ export class MyBody extends Component {
                     }
                 })
                 const json = await response.json()
-                await showResult(json, (a) => { this.setState(old => Object.assign({}, old, { results: a })) })
-                console.log(this.state.results)
+                showResult(json, (a) => { this.setState(old => Object.assign({}, old, { results: a , refreshShowResult: !old.refreshShowResult})) })
             }
             catch{
 
@@ -109,7 +111,7 @@ export class MyBody extends Component {
         //Result anfrage
         if (this.state.displayResult === false) {
             this.searchResults()
-            this.setState(old => (Object.assign({}, old, { displayResult: true, refreshShowResult: !old.refreshShowResult })))
+            this.setState(old => (Object.assign({}, old, { displayResult: true, refreshShowResult: !old.refreshShowResult})))
         }else{
             this.setState(old => (Object.assign({}, old, { displayResult: false })))
         }

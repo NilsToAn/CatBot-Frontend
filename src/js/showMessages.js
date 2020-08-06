@@ -1,13 +1,13 @@
 export default class showMessages{
     constructor(setMainState, divMref){
         this.setMainState = setMainState
-        this.speed = 20
+        this.speed = 17
         this.stopTyping = false
         this.isTyping = false
         this.savedUserMes = null
         this.savedAnswerPack = null
         this.nextFunc = null
-        this.divMaxText = divMref.scrollWidth > 410? (410-20)*(34/39): (divMref.scrollWidth-20)*(34/39)
+        this.divMaxText = divMref.scrollWidth > 410? (410-10)*(40/35): (divMref.scrollWidth-20)*(40/35)
     }
 
     setNewText(text, user){
@@ -110,10 +110,10 @@ export default class showMessages{
         }
     }
 
-    getTextWidth(txt, font) {
+    getTextWidth(txt) {
         this.element = document.createElement('canvas');
         this.context = this.element.getContext("2d");
-        //this.context.font = font;
+        this.context.font = "12pt arial";
         return this.context.measureText(txt).width;
     }
 }
