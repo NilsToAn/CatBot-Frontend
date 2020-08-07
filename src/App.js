@@ -2,6 +2,9 @@ import React from 'react';
 import './App.css';
 import MyBody from './components/MainBody'
 import MyFooter from './components/MyFooter'
+import MyUberuns from './components/MyUberuns'
+import MyImpressum from './components/MyImpressum'
+import MyDatenschutz from './components/MyDatenschutz';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -9,16 +12,20 @@ import {
   Route,
 } from "react-router-dom";
 
+
 function App() {
   return (
     <Router>
       <main className="App">
         <Switch>
           <Route path='/ueberuns'>
-              <div>Über uns</div>
+              <MyUberuns />
           </Route>
           <Route path='/impressum'>
-              <div>impressum</div>
+              <MyImpressum />
+          </Route>
+          <Route path='/datenschutz'>
+              <MyDatenschutz />
           </Route>
           <Route path='/'>
             <MyBody />
