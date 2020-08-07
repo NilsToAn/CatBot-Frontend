@@ -10,20 +10,20 @@ export default function MyFooter(){
         <div className="MyFooter">
             <Container className='FooterContainer'>
                 <Row >
-                    <Col className="text-center">
-                        <Link to='/'>Startseite</Link>
-                    </Col>
-                    <Col className="text-center">
-                        <Link to='/ueberuns'>Über uns</Link>
-                    </Col>
-                    <Col className="text-center">
+                    <Col className="text-center" >
                         <Link to='/impressum'>Impressum</Link>
                     </Col>
-                    <Col className="text-center">
-                        <Link to='/datenschutz'>Datenschutz</Link>
+                    <Col className="text-center" > 
+                        <Link to='/ueberuns'><nobr>Über Uns</nobr></Link>
                     </Col>
-                    <Col className="text-center">
-                        <Link to='/conni'>Künstlerin</Link>
+                    <Col className="text-center" >
+                        <Link to='/'>CatBot</Link>
+                    </Col>
+                    <Col className="text-center" >
+                        <a href='https://www.instagram.com/antlerbuddy/'>Künstlerin</a>
+                    </Col>
+                    <Col className="text-center" >
+                        <Link to='/datenschutz'>Datenschutz</Link>
                     </Col>
                 </Row>
             </Container>
