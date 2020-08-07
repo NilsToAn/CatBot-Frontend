@@ -9,6 +9,7 @@ import ShowResults from './ShowResult'
 import showMessages from '../js/showMessages'
 import Container from 'react-bootstrap/Container';
 import { Row, Col } from 'react-bootstrap'
+import urlFile from '../url.json'
 
 export class MyBody extends Component {
     constructor(props) {
@@ -17,15 +18,13 @@ export class MyBody extends Component {
         this.handleInputChange = this.handleInputChange.bind(this)
         this.handleResultButton = this.handleResultButton.bind(this)
         this.state = firstMainState //in js Folder
-        this.apiurl = 'http://localhost:8080'
-        //this.apiurl =  'http://travel-catbot.de:8080'
         this.divMref = createRef(false)
+        console.log(urlFile.apiurl)
     }
 
     componentDidMount(){
         this.sendMessageToServer('start')
         this.ShowMessages = new showMessages((a) => { this.setState(a) }, this.divMref.current)
-        console.log(window.location.href)
     }
     
     async sendMessageToServer(mes){
@@ -60,7 +59,6 @@ export class MyBody extends Component {
 
         //Anfrage
         await makeServerUpdate(this.state.toServer, (a) => { this.setState(a) }, this.ShowMessages)
-        console.log(this.state.toServer.informationPackage.state)
         if(this.state.toServer.informationPackage.state === 'query'){
             this.setState(old => (Object.assign({}, old, { displayResult: true })))
             this.searchResults()
@@ -89,7 +87,7 @@ export class MyBody extends Component {
     async searchResults(){
         console.log('starte suche')
         this.setState(old => Object.assign({}, old,{results:[]}))
-        const url = this.apiurl+'/request'
+        const url = urlFile.apiurl+'/request'
         console.log('search startet', url)
             try {
                 const response = await fetch(url, {

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 //import 'react-bootstrap-typeahead/css/Typeahead.css';
 import {UserInputSytle, ButtonStyle} from '../js/styles'
+import urlFile from '../url.json'
 
 
 function MyUserinput(props) {
@@ -12,7 +13,7 @@ function MyUserinput(props) {
 
     const handleSearch = (name) => {
         setIsLoading(true);
-        fetch('http://localhost:8080/autofill', {
+        fetch(urlFile.apiurl+'/autofill', {
             method: "POST",
             body: JSON.stringify({ name }),
             headers: {

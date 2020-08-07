@@ -1,11 +1,10 @@
 import processResponse from './prosessResponse'
 import handleServerState from './handleServerState'
+import urlFile from '../url.json'
 
 export default async function makeServerUpdate(mainStateToServer, setMainState, ShowMessages){
-    const url = 'http://localhost:8080'
-    //const url = 'http://travel-catbot.de:8080'
     try {
-        const response = await fetch(url, {
+        const response = await fetch(urlFile.apiurl, {
             method: "POST",
             body: JSON.stringify(mainStateToServer),
             headers: {
