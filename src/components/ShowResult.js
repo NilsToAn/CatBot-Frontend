@@ -7,17 +7,29 @@ export default class ShowResult extends React.PureComponent{
     state = {
         collection: [],
         sortParams: {direction: undefined},
-        classObj: {}
+        classObj: {},
+        isLoading: true,
     }
 
     static getDerivedStateFromProps(props, state){
         const {results} = props
-        if(results.length && results.length !== state.collection.length){
+        if(results.length !== state.collection.length){
+            if(results === false){
+                return {
+                    collection: [],
+                    isLoading : true
+                }
+            }else{
             let resultwithKey = results.map((o,i) => Object.assign(o,{key:i}))
             const sortedRes = orderBy(resultwithKey, "price", ["asc"])
             return {collection: sortedRes, 
                     sortParams: {direction: "asc"}, 
-                    classObj:{priceClass:"MarkedColumn"}}
+                    classObj:{priceClass:"MarkedColumn"},
+                    isLoading: false}
+            }
+        }else if(results.length === 0){
+            return {isLoading: false,
+                    collection: []}
         }else{
             return false
         }
@@ -107,7 +119,7 @@ export default class ShowResult extends React.PureComponent{
         console.log(MyResultComponents.length)
     
     
-
+            console.log(this.state.isLoading)
     return (
         <>
         <div className="TabelHeaderDiv">
@@ -117,48 +129,50 @@ export default class ShowResult extends React.PureComponent{
         </span>
         </div>
         <div className = "TabelContainer">
-        {MyResultComponents.length ?
-            <table className = "ResultTable">
-                <thead>
-                    <tr>
-                        <th 
-                            className = "TableHeader"
-                            onClick={() => this.handleColumnHeaderClick("provider")}
-                            >Anbieter</th>
-                        <th 
-                            className = "TableHeader TableColumnTwo"
-                            onClick={() => this.handleColumnHeaderClick("date")}
-                            >Tag</th>
-                        <th 
-                            className = "TableHeader"
-                            onClick={() => this.handleColumnHeaderClick("origin")}
-                            >Abfahrtsort</th>
-                        <th 
-                            className = "TableHeader TableColumnTwo"
-                            onClick={() => this.handleColumnHeaderClick("deptime")}
-                            >Ab</th>
-                        <th 
-                            className = "TableHeader"
-                            onClick={() => this.handleColumnHeaderClick("arrtime")}
-                            >An</th>
-                        <th 
-                            className = "TableHeader TableColumnTwo"
-                            onClick={() => this.handleColumnHeaderClick("dur")}
-                            >Dauer</th>
-                        <th 
-                            className = "TableHeader"
-                            onClick={() => this.handleColumnHeaderClick("transfers")}
-                            >Umstiege</th>
-                        <th 
-                            className = "TableHeader TableColumnTwo"
-                            onClick={() => this.handleColumnHeaderClick("price")}
-                            >Gesamtpreis</th>
-                    </tr>
-                </thead>
-                <tbody>
-            {MyResultComponents}
-            </tbody>
-            </table>
+        {!this.state.isLoading ?
+            MyResultComponents.length ?
+                <table className = "ResultTable">
+                    <thead>
+                        <tr>
+                            <th 
+                                className = "TableHeader"
+                                onClick={() => this.handleColumnHeaderClick("provider")}
+                                >Anbieter</th>
+                            <th 
+                                className = "TableHeader TableColumnTwo"
+                                onClick={() => this.handleColumnHeaderClick("date")}
+                                >Tag</th>
+                            <th 
+                                className = "TableHeader"
+                                onClick={() => this.handleColumnHeaderClick("origin")}
+                                >Abfahrtsort</th>
+                            <th 
+                                className = "TableHeader TableColumnTwo"
+                                onClick={() => this.handleColumnHeaderClick("deptime")}
+                                >Ab</th>
+                            <th 
+                                className = "TableHeader"
+                                onClick={() => this.handleColumnHeaderClick("arrtime")}
+                                >An</th>
+                            <th 
+                                className = "TableHeader TableColumnTwo"
+                                onClick={() => this.handleColumnHeaderClick("dur")}
+                                >Dauer</th>
+                            <th 
+                                className = "TableHeader"
+                                onClick={() => this.handleColumnHeaderClick("transfers")}
+                                >Umstiege</th>
+                            <th 
+                                className = "TableHeader TableColumnTwo"
+                                onClick={() => this.handleColumnHeaderClick("price")}
+                                >Gesamtpreis</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                {MyResultComponents}
+                </tbody>
+                </table>
+        : <div>Keine Ergebnisse, entweder deine Suche war zu restriktiv oder es gibt technische Probleme. Versuch es nochmal!</div>
         : <div>Lädt...</div>
     }
      </div> 

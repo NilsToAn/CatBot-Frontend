@@ -101,7 +101,7 @@ export class MyBody extends Component {
                 showResult(json, (a) => { this.setState(old => Object.assign({}, old, { results: a , refreshShowResult: !old.refreshShowResult})) })
             }
             catch{
-
+                this.setState(old => Object.assign({}, old, { results: "Fehler" }))
             }
     }
 

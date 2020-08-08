@@ -14,7 +14,8 @@ export default function showResult(resultPackage, setResult){
         )
         const formatPrice = (a) => {
             const price = a.toString()
-            const resPrice = price.length === 4? price+"0 €": price+" €"
+            const dotpos = price.length-price.indexOf('.')
+            const resPrice = dotpos === 2? price+"0 €": price+" €"
             return resPrice
         }
 

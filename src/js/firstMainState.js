@@ -1,5 +1,5 @@
 const firstMainState = {
-  results: {},
+  results: false,
   searchStation: false,
   displayResult: false,
   messanges: [],
