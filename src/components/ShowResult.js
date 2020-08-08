@@ -111,15 +111,10 @@ export default class ShowResult extends React.PureComponent{
       }
 
     render(){
-        console.log('show results')
         const MyResultComponents = this.state.collection ? 
         (this.state.collection.filter(o => o.arrival)).map(o => (
             <ShowOneResult result={o} key={o.key} classObj={this.state.classObj}/>
-        )) : []
-        console.log(MyResultComponents.length)
-    
-    
-            console.log(this.state.isLoading)
+        )) : false
     return (
         <>
         <div className="TabelHeaderDiv">

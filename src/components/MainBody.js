@@ -85,8 +85,7 @@ export class MyBody extends Component {
     }
 
     async searchResults(){
-        console.log('starte suche')
-        this.setState(old => Object.assign({}, old,{results:[]}))
+        this.setState(old => Object.assign({}, old,{results:false}))
         const url = urlFile.apiurl+'/request'
         console.log('search startet', url)
             try {
