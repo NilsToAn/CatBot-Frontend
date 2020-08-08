@@ -20,7 +20,7 @@ export default function MyFooter(){
                         <a href='/'>CatBot</a>
                     </Col>
                     <Col className="text-center">
-                        <Link to='/conni'>Künstlerin</Link>
+                        <a href='https://www.instagram.com/antlerbuddy/' target="_blank" rel="noopener noreferrer">Künstlerin</a>
                     </Col>
                     <Col className="text-center">
                         <Link to='/datenschutz'>Datenschutz</Link>
