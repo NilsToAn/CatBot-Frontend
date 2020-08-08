@@ -116,8 +116,8 @@ export default class ShowResult extends React.PureComponent{
         <span className="TextBeforTabelCity"> {this.props.dest}</span>
         </span>
         </div>
-        {MyResultComponents.length ?
         <div className = "TabelContainer">
+        {MyResultComponents.length ?
             <table className = "ResultTable">
                 <thead>
                     <tr>
@@ -159,9 +159,9 @@ export default class ShowResult extends React.PureComponent{
             {MyResultComponents}
             </tbody>
             </table>
-        </div> 
         : <div>Lädt...</div>
     }
+     </div> 
         </>
     )
 }
