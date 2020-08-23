@@ -7,7 +7,7 @@ function processResponse(responseJson) {
                 informationPackage = responseJson[pack]
                 break;
             case "answerPackage":
-                answerPackege  = responseJson[pack]
+                answerPackege = responseJson[pack]
                 break;
             case "resultPackage":
                 resultPackage = responseJson[pack]

@@ -2,7 +2,7 @@ import processResponse from './prosessResponse'
 import handleServerState from './handleServerState'
 import urlFile from '../url.json'
 
-export default async function makeServerUpdate(mainStateToServer, setMainState, ShowMessages){
+export default async function makeServerUpdate(mainStateToServer, setMainState, ShowMessages) {
     try {
         const response = await fetch(urlFile.apiurl, {
             method: "POST",
@@ -16,10 +16,10 @@ export default async function makeServerUpdate(mainStateToServer, setMainState, 
         //Verarbeitung
         const [informationPackage, answerPackege] = processResponse(json)
         ShowMessages.showMessages(
-            answerPackege, 
-            () => {handleServerState(informationPackage.state, mainStateToServer, setMainState, ShowMessages)}
-            )
-        
+            answerPackege,
+            () => { handleServerState(informationPackage.state, mainStateToServer, setMainState, ShowMessages) }
+        )
+
         //showResult(resultPackage, (a) => {this.setState(old => Object.assign({},old,{results: a}))})
         setMainState((old) => {
             const newState = old

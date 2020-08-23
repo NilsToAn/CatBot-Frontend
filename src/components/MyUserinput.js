@@ -3,17 +3,19 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { AsyncTypeahead } from 'react-bootstrap-typeahead';
 //import 'react-bootstrap-typeahead/css/Typeahead.css';
-import {UserInputSytle, ButtonStyle} from '../js/styles'
+import { UserInputSytle, ButtonStyle } from '../js/styles'
 import urlFile from '../url.json'
 
 
 function MyUserinput(props) {
+    //Renders the userInput textarea or TypeAhead and the submit Button used from MainBody.js
     const [isLoading, setIsLoading] = useState(false);
     const [options, setOptions] = useState([]);
 
     const handleSearch = (name) => {
+        //handle the typeahead for origin and destination correction
         setIsLoading(true);
-        fetch(urlFile.apiurl+'/autofill', {
+        fetch(urlFile.apiurl + '/autofill', {
             method: "POST",
             body: JSON.stringify({ name }),
             headers: {
@@ -61,8 +63,8 @@ function MyUserinput(props) {
                         rows="3"
                         value={props.textarea}
                         placeholder="Eingabe"
-                        className="UserTextarea" 
-                        />}
+                        className="UserTextarea"
+                    />}
             </Form.Group>
             <Button variant="primary" type="submit" style={ButtonStyle}>
                 Senden

@@ -1,25 +1,25 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-export default function OneMessage (props) {
-  //console.log(props)
+export default function OneMessage(props) {
+  //Renders one Message (with link) used from MessangeList.js
   let link = ""
   let replacement = ""
-  let { text, user} = props.data
+  let { text, user } = props.data
   const linkParts1 = text.split('}')
   if (linkParts1.length === 2) {
-      const linkparts2 = linkParts1[0].split('{')
-      if( linkparts2.length === 2){
-         link = linkparts2[1]
-         const replPart1 = linkParts1[1].split(']')
-         if(replPart1.length === 1){
-           text = linkparts2[0]
-           replacement = replPart1[0].substring(1)
-         }else if(replPart1.length === 2){
-            text = linkparts2[0]
-            replacement = replPart1[0].substring(1)
-         }
+    const linkparts2 = linkParts1[0].split('{')
+    if (linkparts2.length === 2) {
+      link = linkparts2[1]
+      const replPart1 = linkParts1[1].split(']')
+      if (replPart1.length === 1) {
+        text = linkparts2[0]
+        replacement = replPart1[0].substring(1)
+      } else if (replPart1.length === 2) {
+        text = linkparts2[0]
+        replacement = replPart1[0].substring(1)
       }
+    }
   }
 
 
@@ -29,7 +29,7 @@ export default function OneMessage (props) {
       <div className="message__text">
         <div className="message__text__content">
           {text}
-          {link ? <a href={link} target="_blank" rel="noopener noreferrer">{replacement}</a>:null}
+          {link ? <a href={link} target="_blank" rel="noopener noreferrer">{replacement}</a> : null}
         </div>
       </div>
     </div>

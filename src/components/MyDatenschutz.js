@@ -1,22 +1,23 @@
 import React from 'react'
-import { Container,Figure } from 'react-bootstrap'
+import { Container, Figure } from 'react-bootstrap'
 import happyPic from '../pics/happy.png'
-import {TopImageStyle} from '../js/styles'
+import { TopImageStyle } from '../js/styles'
 
 export default function MyDatenschutz() {
+    //renders the Datenschutz page
     return (
-<>
-        <Figure>
-            <Figure.Image        
-                style={TopImageStyle}
-                alt={"happy cat"}
-                src={happyPic}
-            />
-        </Figure>
-<Container className='Impressum'>
-<span className="textHeader">Datenschutzerklärung</span>
-<p>
-{`
+        <>
+            <Figure>
+                <Figure.Image
+                    style={TopImageStyle}
+                    alt={"happy cat"}
+                    src={happyPic}
+                />
+            </Figure>
+            <Container className='Impressum'>
+                <span className="textHeader">Datenschutzerklärung</span>
+                <p>
+                    {`
 1. Datenschutz auf einen Blick
 
 Allgemeine Hinweise
@@ -144,8 +145,8 @@ Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. b DSG
 In allen übrigen Fällen beruht die Verarbeitung auf unserem berechtigten Interesse an der effektiven Bearbeitung der an uns gerichteten Anfragen (Art. 6 Abs. 1 lit. f DSGVO) oder auf Ihrer Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) sofern diese abgefragt wurde.
 Die von Ihnen an uns per Kontaktanfragen übersandten Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder der Zweck für die Datenspeicherung entfällt(z. B. nach abgeschlossener Bearbeitung Ihres Anliegens). 
 Zwingende gesetzliche Bestimmungen –insbesondere gesetzliche Aufbewahrungsfristen – bleiben unberührt.`}
-</p>
-        </Container>
+                </p>
+            </Container>
         </>
     )
 }

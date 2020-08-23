@@ -3,9 +3,10 @@ import '../css/MyFooter.css'
 import { Container, Row, Col } from 'react-bootstrap'
 import {
     Link
-  } from "react-router-dom";
+} from "react-router-dom";
 
-export default function MyFooter(){
+export default function MyFooter() {
+    //Render the Footer with the Links used from App.js
     return (
         <div className="MyFooter">
             <Container className='FooterContainer'>
