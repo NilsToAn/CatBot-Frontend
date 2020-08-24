@@ -11,9 +11,9 @@ The whole system is currently hosted [here](https://travel-catbot.de).
 ## How-To install and use the system:
 
 1. Clone this repository
-2. Install '''yarn'''
-2. Run '''yarn''' in the project folder to install all dependencies
-3. Run '''yarn start''' to start the website in developer mode
+2. Install yarn
+2. Run `yarn` in the project folder to install all dependencies
+3. Run `yarn start` to start the website in developer mode
 4. Start the back-end
 5. Now you can chat with the bot on the local website.
 
