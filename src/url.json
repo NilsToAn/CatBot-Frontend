@@ -1,1 +1,4 @@
-{"apiurl":"http://localhost:8080"}
+{
+    "apiurl":"https://travel-catbot.de:3000",
+    "apiurl_local":"http://localhost:8080"
+}
