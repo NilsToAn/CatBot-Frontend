@@ -29,7 +29,7 @@ export class MyBody extends Component {
         console.log(this.props.match.params)
         this.setState((old) => {
             const newState = old
-            newState.toServer.informationPackage = Object.assign(old.toServer.informationPackage, {id:this.props.match.params.id})
+            newState.toServer.informationPackage = Object.assign(old.toServer.informationPackage, {uid:this.props.match.params.id})
             return newState
         })
     }

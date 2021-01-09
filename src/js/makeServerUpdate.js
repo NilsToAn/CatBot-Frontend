@@ -16,7 +16,6 @@ export default async function makeServerUpdate(mainStateToServer, setMainState, 
         //Verarbeitung
         const [informationPackage, answerPackege] = processResponse(json)
         console.log(informationPackage)
-        console.log(mainStateToServer)
         ShowMessages.showMessages(
             answerPackege,
             () => { handleServerState(informationPackage.state, mainStateToServer, setMainState, ShowMessages) }
