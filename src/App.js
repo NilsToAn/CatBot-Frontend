@@ -21,6 +21,7 @@ function App() {
           <Route path='/ueberuns' component={MyUberuns} />
           <Route path='/impressum' component={MyImpressum} />
           <Route path='/datenschutz' component={MyDatenschutz}/>
+          <Route path='/:v/:id' component={MyBody} />
           <Route path='/' component={MyBody} />
         </Switch>
       </main>

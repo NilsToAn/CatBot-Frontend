@@ -26,6 +26,7 @@ export class MyBody extends Component {
         //To start the first messanges from server send 'start'
         this.sendMessageToServer('start')
         this.ShowMessages = new showMessages((a) => { this.setState(a) }, this.divMref.current)
+        console.log(this.props.match.params)
     }
 
     async sendMessageToServer(mes) {
