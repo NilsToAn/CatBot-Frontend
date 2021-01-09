@@ -1,4 +1,5 @@
 const firstMainState = {
+  version: 'normal',
   results: false,
   searchStation: false,
   displayResult: false,

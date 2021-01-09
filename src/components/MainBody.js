@@ -27,11 +27,18 @@ export class MyBody extends Component {
         this.sendMessageToServer('start')
         this.ShowMessages = new showMessages((a) => { this.setState(a) }, this.divMref.current)
         console.log(this.props.match.params)
-        this.setState((old) => {
-            const newState = old
-            newState.toServer.informationPackage = Object.assign(old.toServer.informationPackage, {uid:this.props.match.params.id})
-            return newState
-        })
+        if(this.props.match.params.id && this.props.match.params.v){
+            this.setState((old) => {
+                const newState = old
+                newState.toServer.informationPackage = Object.assign(old.toServer.informationPackage, {uid:this.props.match.params.id})
+                newState.version = this.props.match.params.v === 'b5a' ? 'noperso' : 'normal'
+                return newState
+            })
+        }
+        if(this.props.match.params.v === 'b5a' ){
+            document.body.style.backgroundImage = 'none'
+            document.body.style.backgroundColor = 'gray'
+        }
     }
 
     async sendMessageToServer(mes) {
@@ -135,12 +142,14 @@ export class MyBody extends Component {
     render() {
         return (
             <Container>
+                {this.state.version === 'normal' ?
                 <Row className="justify-content-md-center">
                     <Col xl={this.state.displayResult ? 6 : 12} lg={12}>
                         <MyEmotionPic emotion={this.state.emotion} />
                     </Col>
                     {this.state.displayResult ? <Col lg={12} xl={6}> </Col> : null}
-                </Row>
+                </Row>:
+                <div style={{height:'100px'}}> </div>}
                 <Row style={{ overflow: "hidden" }}>
                     <Col className="leftside" xl={this.state.displayResult ? 6 : 12} lg={12}>
                         <DisplayPart
