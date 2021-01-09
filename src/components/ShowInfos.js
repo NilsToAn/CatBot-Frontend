@@ -5,7 +5,8 @@ import {infoTableStyle, ShowInfosTd} from '../js/styles'
 
 
 function ShowInfos(props) {
-
+    //Show the Informations from the InformationPack used from DisplayPart.js
+    // use /js/sortInfos.js to sort and prettify the infos
     const rows = sortInfos(props.infos)
 
     return (

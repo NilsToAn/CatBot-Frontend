@@ -4,8 +4,7 @@ import OneMessage from './OneMessage.js'
 import '../css/ChatStyle.css'
 
 export default function MessageList (props) {
-
-  //console.log(props)
+  //Used from DisplayPart.js to show all messanges with styling from /css/ChatStyle.css
   return (
     <section className="chat__body">
       <div className="messages" ref={props.divMref}>

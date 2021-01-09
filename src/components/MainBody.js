@@ -1,4 +1,4 @@
-import React, { Component, createRef} from 'react'
+import React, { Component, createRef } from 'react'
 import firstMainState from '../js/firstMainState'
 import makeServerUpdate from '../js/makeServerUpdate'
 import MyUserinput from './MyUserinput'
@@ -12,6 +12,7 @@ import { Row, Col } from 'react-bootstrap'
 import urlFile from '../url.json'
 
 export class MyBody extends Component {
+    //The file where almost everything happens used from App.js as MyBody
     constructor(props) {
         super(props)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -19,15 +20,16 @@ export class MyBody extends Component {
         this.handleResultButton = this.handleResultButton.bind(this)
         this.state = firstMainState //in js Folder
         this.divMref = createRef(false)
-        console.log(urlFile.apiurl)
     }
 
-    componentDidMount(){
+    componentDidMount() {
+        //To start the first messanges from server send 'start'
         this.sendMessageToServer('start')
         this.ShowMessages = new showMessages((a) => { this.setState(a) }, this.divMref.current)
     }
-    
-    async sendMessageToServer(mes){
+
+    async sendMessageToServer(mes) {
+        //Send the user messange together with the informationPack to the server only for componentDidMount (i think)
         if (!mes) { return }
         const updateState = async () => {
             this.setState((old) => {
@@ -38,14 +40,17 @@ export class MyBody extends Component {
         }
         await updateState()
 
-        //Anfrage
-        makeServerUpdate(this.state.toServer, (a) => { this.setState(a) },  this.ShowMessages)
+        //in file /js/makeServerUpdate.js
+        makeServerUpdate(this.state.toServer, (a) => { this.setState(a) }, this.ShowMessages)
     }
 
     async handleSubmit(e) {
+        //handle click of the submit button
         e.preventDefault()
         const mes = this.state.textarea
+        //check if something was written
         if (!mes) { return }
+        //reset textarea und show messange in text
         const updateState = async () => {
             this.setState((old) => {
                 const newState = old
@@ -57,24 +62,29 @@ export class MyBody extends Component {
         }
         await updateState()
 
-        //Anfrage
+        //in file /js/makeServerUpdate.js
         await makeServerUpdate(this.state.toServer, (a) => { this.setState(a) }, this.ShowMessages)
-        if(this.state.toServer.informationPackage.state === 'query'){
+        //check if something is spezial with this sate
+        if (this.state.toServer.informationPackage.state === 'query') {
+            //search for results
             this.setState(old => (Object.assign({}, old, { displayResult: true })))
             this.searchResults()
         }
-        if(this.state.toServer.informationPackage.state === 'origincorr' || this.state.toServer.informationPackage.state === 'destinationcorr' ){
+        if (this.state.toServer.informationPackage.state === 'origincorr' || this.state.toServer.informationPackage.state === 'destinationcorr') {
+            //change the input from textarea to TypeAhead
             this.setState(old => (Object.assign({}, old, { searchStation: true })))
-        }else{
+        } else {
             this.setState(old => (Object.assign({}, old, { searchStation: false })))
         }
-        if(this.state.toServer.informationPackage.state === 'or-again'){
-            this.setState(old => Object.assign({}, old, { results: [], displayResult: false, refreshShowResult: !old.refreshShowResult } ))
+        if (this.state.toServer.informationPackage.state === 'or-again') {
+            //reset all informations
+            this.setState(old => Object.assign({}, old, { results: [], displayResult: false, refreshShowResult: !old.refreshShowResult }))
         }
     }
 
 
     handleInputChange(event) {
+        //For controlled Inputs
         const target = event.target;
         const value = target.type === 'checkbox' ? target.checked : target.value;
         const name = target.name;
@@ -84,33 +94,34 @@ export class MyBody extends Component {
         });
     }
 
-    async searchResults(){
-        console.log('starte suche')
-        this.setState(old => Object.assign({}, old,{results:[]}))
-        const url = urlFile.apiurl+'/request'
+    async searchResults() {
+        //the function which searches for results
+        this.setState(old => Object.assign({}, old, { results: false }))
+        const url = urlFile.apiurl + '/request'
         console.log('search startet', url)
-            try {
-                const response = await fetch(url, {
-                    method: "POST",
-                    body: JSON.stringify(this.state.toServer),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
-                const json = await response.json()
-                showResult(json, (a) => { this.setState(old => Object.assign({}, old, { results: a , refreshShowResult: !old.refreshShowResult})) })
-            }
-            catch{
-
-            }
+        try {
+            const response = await fetch(url, {
+                method: "POST",
+                body: JSON.stringify(this.state.toServer),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            const json = await response.json()
+            //show the results from /js/showResult.js
+            showResult(json, (a) => { this.setState(old => Object.assign({}, old, { results: a, refreshShowResult: !old.refreshShowResult })) })
+        }
+        catch{
+            this.setState(old => Object.assign({}, old, { results: "Fehler" }))
+        }
     }
 
     async handleResultButton(event) {
-        //Result anfrage
+        //handle result button used from DisplayPart.js
         if (this.state.displayResult === false) {
             this.searchResults()
-            this.setState(old => (Object.assign({}, old, { displayResult: true, refreshShowResult: !old.refreshShowResult})))
-        }else{
+            this.setState(old => (Object.assign({}, old, { displayResult: true, refreshShowResult: !old.refreshShowResult })))
+        } else {
             this.setState(old => (Object.assign({}, old, { displayResult: false })))
         }
     }
@@ -119,18 +130,18 @@ export class MyBody extends Component {
         return (
             <Container>
                 <Row className="justify-content-md-center">
-                    <Col xl={ this.state.displayResult ? 6 : 12} lg={12}>
+                    <Col xl={this.state.displayResult ? 6 : 12} lg={12}>
                         <MyEmotionPic emotion={this.state.emotion} />
                     </Col>
                     {this.state.displayResult ? <Col lg={12} xl={6}> </Col> : null}
                 </Row>
                 <Row style={{ overflow: "hidden" }}>
-                    <Col className="leftside" xl={ this.state.displayResult ? 6 : 12} lg={12}>
+                    <Col className="leftside" xl={this.state.displayResult ? 6 : 12} lg={12}>
                         <DisplayPart
                             messanges={this.state.messanges}
                             infos={this.state.toServer.informationPackage}
                             changeDisplayResult={this.handleResultButton}
-                            divMrev = {this.divMref}
+                            divMrev={this.divMref}
                         />
                         <MyUserinput
                             handleSubmit={this.handleSubmit}
@@ -138,10 +149,10 @@ export class MyBody extends Component {
                             textarea={this.state.textarea}
                             searchStation={this.state.searchStation} />
                     </Col>
-                    {this.state.displayResult ? 
-                    <Col lg={12} xl={6}>
-                        <ShowResults results={this.state.results} dest={this.state.toServer.informationPackage.destination}/>
-                    </Col> : null}
+                    {this.state.displayResult ?
+                        <Col lg={12} xl={6}>
+                            <ShowResults results={this.state.results} dest={this.state.toServer.informationPackage.destination} />
+                        </Col> : null}
                 </Row>
             </Container>
         )
