@@ -19,7 +19,7 @@ const firstMainState = {
       transfers: -1,
       state: '', // if users input can be inferred due to questions
       repeat: false,
-      uid:-1
+      uid:'no_ID'
     }
   }
 }
