@@ -17,7 +17,8 @@ const firstMainState = {
       budget: -1,
       transfers: -1,
       state: '', // if users input can be inferred due to questions
-      repeat: false
+      repeat: false,
+      id:-1
     }
   }
 }

@@ -27,6 +27,11 @@ export class MyBody extends Component {
         this.sendMessageToServer('start')
         this.ShowMessages = new showMessages((a) => { this.setState(a) }, this.divMref.current)
         console.log(this.props.match.params)
+        this.setState((old) => {
+            const newState = old
+            newState.toServer.informationPackage = Object.assign(old.toServer.informationPackage, {id:this.props.match.params.id})
+            return newState
+        })
     }
 
     async sendMessageToServer(mes) {
