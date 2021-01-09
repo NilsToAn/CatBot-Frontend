@@ -18,18 +18,10 @@ function App() {
     <Router>
       <main className="App">
         <Switch>
-          <Route path='/ueberuns'>
-              <MyUberuns />
-          </Route>
-          <Route path='/impressum'>
-              <MyImpressum />
-          </Route>
-          <Route path='/datenschutz'>
-              <MyDatenschutz />
-          </Route>
-          <Route path='/'>
-            <MyBody />
-          </Route>
+          <Route path='/ueberuns' component={MyUberuns} />
+          <Route path='/impressum' component={MyImpressum} />
+          <Route path='/datenschutz' component={MyDatenschutz}/>
+          <Route path='/' component={MyBody} />
         </Switch>
       </main>
       <footer>
