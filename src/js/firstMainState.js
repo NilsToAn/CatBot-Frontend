@@ -1,5 +1,4 @@
 const firstMainState = {
-  version: 'normal',
   results: false,
   searchStation: false,
   displayResult: false,
@@ -19,7 +18,8 @@ const firstMainState = {
       transfers: -1,
       state: '', // if users input can be inferred due to questions
       repeat: false,
-      uid:'no_ID'
+      uid:'no_ID',
+      pers:1
     }
   }
 }

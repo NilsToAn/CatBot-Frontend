@@ -31,8 +31,9 @@ export class MyBody extends Component {
             this.props.setWithFooter(false)
             this.setState((old) => {
                 const newState = old
-                newState.toServer.informationPackage = Object.assign(old.toServer.informationPackage, {uid:this.props.match.params.id})
-                newState.version = this.props.match.params.v === 'b5a' ? 'noperso' : 'normal'
+                const pers = this.props.match.params.v === 'b5a' ? 0:1
+                newState.toServer.informationPackage = Object.assign(old.toServer.informationPackage, 
+                    {uid:this.props.match.params.id,pers})
                 return newState
             })
         }
@@ -143,7 +144,7 @@ export class MyBody extends Component {
     render() {
         return (
             <Container>
-                {this.state.version === 'normal' ?
+                {this.state.toServer.informationPackage.pers  === 1 ?
                 <Row className="justify-content-md-center">
                     <Col xl={this.state.displayResult ? 6 : 12} lg={12}>
                         <MyEmotionPic emotion={this.state.emotion} />
