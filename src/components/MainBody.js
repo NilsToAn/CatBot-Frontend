@@ -28,6 +28,7 @@ export class MyBody extends Component {
         this.ShowMessages = new showMessages((a) => { this.setState(a) }, this.divMref.current)
         console.log(this.props.match.params)
         if(this.props.match.params.id && this.props.match.params.v){
+            this.props.setWithFooter(false)
             this.setState((old) => {
                 const newState = old
                 newState.toServer.informationPackage = Object.assign(old.toServer.informationPackage, {uid:this.props.match.params.id})

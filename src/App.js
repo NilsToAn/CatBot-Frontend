@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './App.css';
 import MyBody from './components/MainBody'
 import MyFooter from './components/MyFooter'
@@ -14,6 +14,7 @@ import {
 
 
 function App() {
+  const [withFooter, setWithFooter] = useState(true)
   return (
     <Router>
       <main className="App">
@@ -21,13 +22,16 @@ function App() {
           <Route path='/ueberuns' component={MyUberuns} />
           <Route path='/impressum' component={MyImpressum} />
           <Route path='/datenschutz' component={MyDatenschutz}/>
-          <Route path='/:v&:id' component={MyBody} />
+          <Route path='/:v&:id' render={props => 
+            <MyBody {...props} setWithFooter={setWithFooter}/>} />
           <Route path='/' component={MyBody} />
         </Switch>
       </main>
+      {withFooter?
       <footer>
         <MyFooter/>
       </footer>
+    :null}
     </Router>
   )
 }
