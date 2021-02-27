@@ -24,7 +24,7 @@ function App() {
           <Route path='/datenschutz' component={MyDatenschutz}/>
           <Route path='/:v&:id' render={props => 
             <MyBody {...props} setWithFooter={setWithFooter}/>} />
-          <Route path='/' component={MyBody} />
+          {/*<Route path='/' component={MyBody} />*/}
         </Switch>
       </main>
       {withFooter?
