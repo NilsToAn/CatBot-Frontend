@@ -144,7 +144,7 @@ export class MyBody extends Component {
     render() {
         return (
             <Container>
-                {this.state.toServer.informationPackage.pers  === 1 ?
+                {this.state.toServer.informationPackage.pers ?
                 <Row className="justify-content-md-center">
                     <Col xl={this.state.displayResult ? 6 : 12} lg={12}>
                         <MyEmotionPic emotion={this.state.emotion} />
