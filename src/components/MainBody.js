@@ -11,6 +11,11 @@ import Container from 'react-bootstrap/Container';
 import { Row, Col } from 'react-bootstrap'
 import urlFile from '../url.json'
 
+//No peros imports:
+import { TopImageStyle } from '../js/styles'
+import Figure from 'react-bootstrap/Figure'
+import pic from '../pics/chat_icon.png'
+
 export class MyBody extends Component {
     //The file where almost everything happens used from App.js as MyBody
     constructor(props) {
@@ -38,8 +43,8 @@ export class MyBody extends Component {
             })
         }
         if(this.props.match.params.v === 'b5a' ){
-            document.body.style.backgroundImage = 'none'
-            document.body.style.backgroundColor = 'gray'
+            document.body.style.backgroundImage = 'url("/dataCatBot/background_blur.png")'
+            //document.body.style.backgroundColor = 'gray'
         }
     }
 
@@ -144,14 +149,22 @@ export class MyBody extends Component {
     render() {
         return (
             <Container>
-                {this.state.toServer.informationPackage.pers ?
+                
                 <Row className="justify-content-md-center">
                     <Col xl={this.state.displayResult ? 6 : 12} lg={12}>
-                        <MyEmotionPic emotion={this.state.emotion} />
+                    {this.state.toServer.informationPackage.pers ?
+                       <MyEmotionPic emotion={this.state.emotion} />
+                        :
+                        <Figure >
+                            <Figure.Image
+                                style={TopImageStyle}
+                                alt="ChatIcon"
+                                src={pic}
+                            />
+                        </Figure>}
                     </Col>
                     {this.state.displayResult ? <Col lg={12} xl={6}> </Col> : null}
-                </Row>:
-                <div style={{height:'100px'}}> </div>}
+                </Row>
                 <Row style={{ overflow: "hidden" }}>
                     <Col className="leftside" xl={this.state.displayResult ? 6 : 12} lg={12}>
                         <DisplayPart
