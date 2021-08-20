@@ -44,6 +44,7 @@ export class MyBody extends Component {
         }
         if(this.props.match.params.v === 'b5a' ){
             document.body.style.backgroundImage = 'url("/dataCatBot/background_blur.png")'
+            //document.body.style.backgroundImage = 'url("/background_blur.png")'
             //document.body.style.backgroundColor = 'gray'
         }
     }
