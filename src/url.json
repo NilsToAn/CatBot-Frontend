@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 {
     "apiurl":"https://travel-catbot.de:3000",
     "apiurl_local":"http://localhost:8080"
 }
+=======
+{"apiurl_s":"https://travel-catbot.de:3000",
+"apiurl":"http://localhost:8080/"}
+>>>>>>> 5e0015b55c5e917253cc448aa0738451c183bff2

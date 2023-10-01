@@ -22,8 +22,8 @@ export default function MyUberuns() {
             </p>
                 <p>
                     {`
-            Git1
-            Git2
+            https://github.com/NilsToAn/CatBot-Frontend
+            https://github.com/FelixTheodor/CatBot-Backend
             `}
                 </p>
                 <p>
